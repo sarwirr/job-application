@@ -14,7 +14,7 @@ export class AuthService {
     if (user) {
     const match = await bcrypt.compare(password, user.password);
     if (match) {
-      //  console.log(user._id.toString());
+    //    console.log(user._id.toString());
       
       return { username: user.firstname, email : user.email , id: user._id.toString() , roles:user.role };
     }}
@@ -22,9 +22,9 @@ export class AuthService {
   }
 
   async login(user: any) {
-  //  console.log(user);
+    // console.log(user);
     const payload = { username: user.username, email : user.email , userId: user.id, roles:user.roles};
-   // console.log(payload);
+    // console.log(payload);
     return {
       access_token: this.jwtService.sign(payload),
       user
