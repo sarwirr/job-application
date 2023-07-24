@@ -21,8 +21,20 @@ export class UserService {
 
   }
 
+  
   async findAll(): Promise<User[]> {
     return this.userRepository.find();
+  }
+
+  async findUserbyId(id: string): Promise<User> {
+    // console.log(id);
+    return this.userRepository.findOne({ _id :id}).populate('fileList').exec();
+  }
+
+  async findnameofUserbyId(id: string) {
+    const user = await this.userRepository.findOne({ _id :id}).populate('name').exec();
+    return ({username: user.firstname});
+   
   }
 
   async showmeroles(id: string){
@@ -30,9 +42,11 @@ export class UserService {
     return ({roles: user.role});
   }
 
+
   async findOne(email: string): Promise<User | null> {
     return this.userRepository.findOne({ email });
   }
+
 
 
   async update(email: string, updateUserDto: UpdateUserDto) {
@@ -43,7 +57,6 @@ export class UserService {
     }
     return this.userRepository.findOneAndUpdate({ email }, updateUserDto);
   }
-
 
   
   remove(email: string) {
