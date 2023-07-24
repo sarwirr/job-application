@@ -17,6 +17,9 @@ export class CreateUserDto
 
     @IsNotEmpty()
     password : string;
+
+    @IsNotEmpty()
+    email : string;
   
     @MinLength(3)
     @MaxLength(32)

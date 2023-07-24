@@ -25,15 +25,29 @@ export class UserService {
     return this.userRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async showmeroles(id: string){
+    const user = await this.userRepository.findOne({ _id :id});
+    return ({roles: user.role});
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async findOne(email: string): Promise<User | null> {
+    return this.userRepository.findOne({ email });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+
+  async update(email: string, updateUserDto: UpdateUserDto) {
+
+    if (updateUserDto.password) {
+      const saltOrRounds = 10;
+      updateUserDto.password = await bcrypt.hash(updateUserDto.password, saltOrRounds);
+    }
+    return this.userRepository.findOneAndUpdate({ email }, updateUserDto);
   }
+
+
+  
+  remove(email: string) {
+    return this.userRepository.findOneAndDelete({ email });
+  }
+
 }
