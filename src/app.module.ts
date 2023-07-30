@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
+import { JobModule } from './job/job.module';
+import { ApplicationModule } from './application/application.module';
 
 require('dotenv').config(); 
 @Module({
@@ -12,7 +14,9 @@ require('dotenv').config();
     MongooseModule.forRoot(
       process.env.MONGODB_KEY,
     ),
-    AuthModule,],
+    AuthModule,
+    JobModule,
+    ApplicationModule,],
   controllers: [AppController],
   providers: [AppService],
 })
