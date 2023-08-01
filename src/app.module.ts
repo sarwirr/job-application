@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { JobModule } from './job/job.module';
 import { ApplicationModule } from './application/application.module';
+import { CompanyModule } from './company/company.module';
 
 require('dotenv').config(); 
 @Module({
@@ -16,7 +17,8 @@ require('dotenv').config();
     ),
     AuthModule,
     JobModule,
-    ApplicationModule,],
+    ApplicationModule,
+    CompanyModule,],
   controllers: [AppController],
   providers: [AppService],
 })
