@@ -17,7 +17,12 @@ export class CompanyController {
     return this.companyService.findAll();
   }
 
-  @Get(':id')
+  @Get('findcompanybyemail/:email')
+  findByEmail(@Param('email') email: string){
+    return this.companyService.findOneByEmail(email);
+  }
+
+  @Get('findcompanyById/:id')
   findOne(@Param('id') id: string) {
     return this.companyService.findOne(id);
   }

@@ -28,7 +28,12 @@ export class CompanyService {
 
   async findOne(id: string): Promise<Company>  {
     const company = (await this.CompanyRepository.findOne({ _id :id}));
-    return ;
+    return company ;
+  }
+
+  async findOneByEmail (email: string): Promise <Company>{
+    const company = (await this.CompanyRepository.findOne({ email : email}));
+    return company ; 
   }
 
   async update(id: string, updateCompanyDto: UpdateCompanyDto) {

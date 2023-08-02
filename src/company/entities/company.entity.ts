@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Document, Types } from 'mongoose'
 import { Skill } from 'src/utils/types'
 import { Job } from 'src/job/entities/job.entity'
+import { User } from 'src/user/entities/user.entity'
 
 
 export type CompanyDocument = Company & Document
@@ -28,6 +29,9 @@ export class Company  {
 
   @Prop({ default: null })
   website: string
+
+  @Prop()
+  role: string;
 
   @Prop({ required: true })
   state: string

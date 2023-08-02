@@ -23,42 +23,52 @@ export class AuthService {
     return null;
   }
 
-  async login(user: any) {
-    // console.log(user);
-    const payload = { username: user.username, email : user.email , userId: user.id, roles:user.roles};
-    // console.log(payload);
-    return {
-      access_token: this.jwtService.sign(payload),
-      user
-    };
+
+  async validateCompany(companyEmail: string, companyPassword: string): Promise<any> {
+    const company = await this.companyService.findOneByEmail(companyEmail);
+  
+    if (company) {
+    const match = await bcrypt.compare(companyPassword, company.password);
+    if (match) {
+        
+        // console.log(company._id.toString());
+      
+      return { companyname: company.name, email : company.email , id: company._id.toString() , roles:company.role };
+    }}
+    return null;
+  }
+
+
+  async login(userOrCompany: any) {
+
+     if (userOrCompany.username) {
+      // User login
+      const payload = {
+        username: userOrCompany.username,
+        email: userOrCompany.email,
+        userId: userOrCompany.id,
+        role: userOrCompany.role,
+      };
+      return {
+        access_token: this.jwtService.sign(payload),
+        user: userOrCompany,
+      };
+    } else if (userOrCompany.companyname) {
+      // Company login
+      const payload = {
+        companyName: userOrCompany.companyName,
+        email: userOrCompany.email,
+        companyId: userOrCompany.id,
+        roles: userOrCompany.roles,
+      };
+      return {
+        access_token: this.jwtService.sign(payload),
+        company: userOrCompany,
+      };
+    }
+    return ("you are here");
   }
 
 
 
-  //company auth
-
-  
-
-  // async validateCompany(email: string, password: string): Promise<any> {
-  //   const company = await this.companyService.findOne(email);
-    
-  //   if (company) {
-  //   const match = await bcrypt.compare(password, company.password);
-  //   if (match) {
-  //   //    console.log(user._id.toString());
-      
-  //     return { username: company.name, email : company.email , id: company._id.toString()  };
-  //   }}
-  //   return null;
-  // }
-
-  // async loginCompany(company: any) {
-  //   // console.log(user);
-  //   const payload = { username: company.username, email : company.email , companyId: company.id, roles:company.roles};
-  //   // console.log(payload);
-  //   return {
-  //     access_token: this.jwtService.sign(payload),
-  //     company
-  //   };
-  // }
 }

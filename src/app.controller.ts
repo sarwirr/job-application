@@ -3,6 +3,7 @@ import { AppService } from './app.service';
 import { AuthService } from './auth/auth.service';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import {LocalAuthGuard} from './auth/local-auth.guard';
+import { CompanyAuthGuard } from './auth/company-auth.guard';
 
 require('dotenv').config(); 
 
@@ -17,15 +18,14 @@ export class AppController {
   
     return this.authService.login(req.user);
   }
-  
 
-  // @UseGuards(LocalAuthGuard)
-  // @Post('auth/loginCompany')
-  // async loginCompany(@Request() req) {
-  
-  //   return this.authService.login(req.company);
-  // }
-
+   // New endpoint for company login
+   @UseGuards(CompanyAuthGuard)
+   @Post('auth/company-login')
+   async loginCompany(@Request() req) {
+     return this.authService.login(req.user);
+   }
+ 
 
   @UseGuards(JwtAuthGuard)
   @Get('profile')

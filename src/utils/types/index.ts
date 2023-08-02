@@ -1,4 +1,5 @@
 import { APPLICATION_STATUSES,GENDERS, JOB_TYPES, MESSAGE_STATUS, MESSAGE_TYPES, SERVICES, SKILLS, TARGETS  } from "../constants"
+
 type ObjectValuesUnion<T extends Record<string, string>> = T extends Record<string, infer U> ? U : never
 
 export type Skill = (typeof SKILLS)[number]

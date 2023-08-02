@@ -7,6 +7,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { JwtStrategy } from './jwt.strategy';
 import { CompanyModule } from 'src/company/company.module';
+import { CompanyStrategy } from './company.strategy';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { CompanyModule } from 'src/company/company.module';
       signOptions: { expiresIn: '2h' },
     }),
   ],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy, CompanyStrategy],
   exports: [AuthService],
 })
 export class AuthModule {}
