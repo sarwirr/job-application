@@ -1,16 +1,16 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import { Document, Types } from 'mongoose'
-import { Skill } from 'src/utils/types'
+import mongoose, { Document, Types } from 'mongoose'
 import { Job } from 'src/job/entities/job.entity'
-import { User } from 'src/user/entities/user.entity'
+
 
 
 export type CompanyDocument = Company & Document
 
-@Schema({ timestamps: true })
+@Schema()
 export class Company  {
 
-    _id;
+
+ _id;
     
   @Prop({ required: true })
   name: string
@@ -39,8 +39,10 @@ export class Company  {
   @Prop({ required: true })
   country: string
 
-  @Prop({ default: [], ref: Job.name })
-  postings?: Types.ObjectId[]
+  @Prop({
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: () => Job}] 
+  })
+  postings: Job[]; 
 
   @Prop({ default: [] })
   hired?: []

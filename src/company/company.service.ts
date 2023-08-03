@@ -11,28 +11,28 @@ const hat = require('hat');
 @Injectable()
 export class CompanyService {
 
-  constructor(@InjectModel(Company.name) private CompanyRepository: Model<CompanyDocument>) {
+  constructor(@InjectModel(Company.name) private companyModel: Model<CompanyDocument>) {
     
   }
   
  async register (createCompanyDto: CreateCompanyDto) {
        const saltOrRounds = 10;
     createCompanyDto.password = await bcrypt.hash(createCompanyDto.password, saltOrRounds);
-    return this.CompanyRepository.create({ ...createCompanyDto, token: hat() });
+    return this.companyModel.create({ ...createCompanyDto, token: hat() });
 
   }
 
   async findAll(): Promise<Company[]> {
-    return this.CompanyRepository.find();
+    return this.companyModel.find();
   }
 
   async findOne(id: string): Promise<Company>  {
-    const company = (await this.CompanyRepository.findOne({ _id :id}));
-    return company ;
+    const company = await this.companyModel.findOne({ _id :id});
+    return (company) ;
   }
 
   async findOneByEmail (email: string): Promise <Company>{
-    const company = (await this.CompanyRepository.findOne({ email : email}));
+    const company = (await this.companyModel.findOne({ email : email}));
     return company ; 
   }
 
@@ -42,11 +42,11 @@ export class CompanyService {
       const saltOrRounds = 10;
       updateCompanyDto.password = await bcrypt.hash(updateCompanyDto.password, saltOrRounds);
     }
-    return this.CompanyRepository.findOneAndUpdate({ _id : id }, updateCompanyDto);
+    return this.companyModel.findOneAndUpdate({ _id : id }, updateCompanyDto);
 
   }
 
   remove(id: string) {
-    return this.CompanyRepository.findOneAndDelete({_id: id});
+    return this.companyModel.findOneAndDelete({_id: id});
   }
 }

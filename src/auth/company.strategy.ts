@@ -14,7 +14,7 @@ export class CompanyStrategy extends PassportStrategy(Strategy, 'company') {
 
   async validate(companyEmail: string, companyPassword: string): Promise<any> {
     const company = await this.authService.validateCompany(companyEmail, companyPassword);
-    // console.log(company);
+    //  console.log(company);
     if (!company) {
       throw new UnauthorizedException('Invalid credentials');
     }
