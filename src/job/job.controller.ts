@@ -26,6 +26,11 @@ export class JobController {
     return this.jobService.findOne(id);
   }
 
+  @Get('getcompanybyjobid/:id')
+  findCompany(@Param('id') id : string){
+    return this.jobService.getcompanyIdbyJobId(id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateJobDto: UpdateJobDto) {
     return this.jobService.update(id, updateJobDto);

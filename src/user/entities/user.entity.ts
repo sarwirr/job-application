@@ -1,7 +1,9 @@
 
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, HydratedDocument } from 'mongoose';
+import mongoose, { Document, HydratedDocument } from 'mongoose';
+import { Application} from 'src/application/entities/application.entity';
 import { Gender } from 'src/utils/types';
+import { Exclude } from 'class-transformer';
 export type UserDocument = HydratedDocument<User>;
 
 @Schema()
@@ -28,6 +30,11 @@ export  class User {
 
     @Prop()
     dateBirth: string;
+
+    @Prop({ 
+        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Application' }]
+    })
+      appliedJobs: Application[];
 
     @Prop({ default: null, type: String })
     gender: Gender;

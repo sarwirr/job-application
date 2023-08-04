@@ -40,7 +40,7 @@ export class Company  {
   country: string
 
   @Prop({
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: () => Job}] 
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }]
   })
   postings: Job[]; 
 

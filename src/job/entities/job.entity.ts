@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import mongoose, { Document, HydratedDocument, Types } from 'mongoose'
+import { Application } from 'src/application/entities/application.entity';
 import { Company } from 'src/company/entities/company.entity';
 import { JOB_TYPES } from 'src/utils/constants';
 import { JobTypeLowerCase, Skill } from 'src/utils/types';
@@ -10,8 +11,11 @@ export type JobDocument = HydratedDocument<Job>;
 
 @Schema()
 export class Job {
+
+   _id;
+
   @Prop({ 
-    type: mongoose.Schema.Types.ObjectId,  ref: () => "Company" 
+     type: mongoose.Schema.Types.ObjectId, ref: 'Company' 
 })
   recruiter: Company;
 
@@ -33,8 +37,9 @@ export class Job {
   @Prop({ default: [] })
   tags?: Skill[]
 
-  @Prop({ default: [] })
-  applications?: Types.ObjectId[]
+  @Prop({  type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Application' }]
+  })
+  applications: Application[];
 
  
 

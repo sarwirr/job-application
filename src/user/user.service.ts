@@ -28,7 +28,7 @@ export class UserService {
 
   async findUserbyId(id: string): Promise<User> {
     // console.log(id);
-    return this.userRepository.findOne({ _id :id}).populate('fileList').exec();
+    return this.userRepository.findOne({ _id :id}).exec();
   }
 
   async findnameofUserbyId(id: string) {
