@@ -21,7 +21,7 @@ export class JobController {
     return this.jobService.findAll();
   }
 
-  @Get(':id')
+  @Get('findjobbyid/:id')
   findOne(@Param('id') id: string) {
     return this.jobService.findOne(id);
   }

@@ -1,15 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import mongoose, { Document, Types } from 'mongoose'
 import { Job } from 'src/job/entities/job.entity'
-
-
-
 export type CompanyDocument = Company & Document
 
 @Schema()
 export class Company  {
-
-
  _id;
     
   @Prop({ required: true })

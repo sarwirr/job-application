@@ -11,6 +11,15 @@ import { CompanyModule } from './company/company.module';
 require('dotenv').config(); 
 @Module({
   imports: [
+    //configure CORS here
+    // CorsModule.forRoot({
+    //   origin:  'http://localhost:4200',
+    //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    //   // preflightContinue: false,
+    //   // optionsSuccessStatus: 204,
+    //   credentials: true,
+    // }),
+
     UserModule,
     MongooseModule.forRoot(
       process.env.MONGODB_KEY,

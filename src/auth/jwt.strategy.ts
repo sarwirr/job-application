@@ -18,7 +18,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   
     // Check if the payload is for a user
     if (payload.hasOwnProperty("userId") ) {
-      console.log(payload.userId, payload.username, payload.email, payload.roles);
+      // console.log(payload.userId, payload.username, payload.email, payload.roles);
   
       // Return the payload for users
       return { userId: payload.userId, username: payload.username, email: payload.email, roles: payload.roles };

@@ -27,6 +27,7 @@ export class ApplicationController {
       
       console.log("recruiter id :")
       const recuiter_id = job.recruiter.toString() ; 
+      
       console.log(recuiter_id);
       console.log("jobid :");
       console.log(jobId);
