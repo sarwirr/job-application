@@ -16,7 +16,7 @@ export class AuthService {
     if (user) {
     const match = await bcrypt.compare(password, user.password);
     if (match) {
-    //    console.log(user._id.toString());
+  
       
       return { username: user.firstname, email : user.email , id: user._id.toString() , roles:user.role };
     }}
@@ -31,7 +31,7 @@ export class AuthService {
     const match = await bcrypt.compare(companyPassword, company.password);
     if (match) {
         
-        // console.log(company._id.toString());
+      
       
       return { companyname: company.name, email : company.email , id: company._id.toString() , roles:company.role };
     }}
