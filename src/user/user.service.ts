@@ -27,7 +27,6 @@ export class UserService {
   }
 
   async findUserbyId(id: string): Promise<User> {
-    // console.log(id);
     return this.userRepository.findOne({ _id :id}).exec();
   }
 
@@ -46,9 +45,7 @@ export class UserService {
   async findOne(email: string): Promise<User | null> {
     return this.userRepository.findOne({ email });
   }
-
-
-
+  
   async update(email: string, updateUserDto: UpdateUserDto) {
 
     if (updateUserDto.password) {
