@@ -7,7 +7,7 @@ require('dotenv').config();
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService, private authService: AuthService) {}
+  constructor(private authService: AuthService) {}
 
   @Post('auth/login')
   async loginUser(@Body() body) {
