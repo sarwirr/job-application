@@ -44,6 +44,7 @@ export class AuthService {
     return null;
   }
 
+<<<<<<< HEAD
   async userLogin(user: UserLoginDto) {
     const payload = await this.validate(user.email, user.password);
 
@@ -51,6 +52,15 @@ export class AuthService {
       token: this.jwtService.sign(payload),
       payload
     } : { message: 'Invalid email or password' };
+=======
+  async userLogin(user: Partial<User>) {
+    const payload = await this.validate(user.email, user.password);
+
+    return {
+      access_token: this.jwtService.sign(payload),
+      user: user,
+    };
+>>>>>>> 7956da0 (Removed Unecessary Guard)
   }
 
   async userRegister(createUserDto: CreateUserDto) {
