@@ -39,12 +39,12 @@ export class AuthService {
   }
 
   async userLogin(user: Partial<User>) {
-    const payload = this.validate(user.email, user.password);
+    const payload = await this.validate(user.email, user.password);
 
-      return {
-        access_token: this.jwtService.sign(payload),
-        user: user,
-      };
+    return {
+      access_token: this.jwtService.sign(payload),
+      user: user,
+    };
   }
 
   async companyLogin(company: Partial<Company>) {
