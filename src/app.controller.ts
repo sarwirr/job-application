@@ -9,23 +9,19 @@ require('dotenv').config();
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService,
-    private authService: AuthService) {}
-  
+  constructor(private readonly appService: AppService, private authService: AuthService) {}
+
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   async loginUser(@Request() req) {
-  
-    return this.authService.login(req.user);
+    return this.authService.userLogin(req.user);
   }
 
-   // New endpoint for company login
-   @UseGuards(CompanyAuthGuard)
-   @Post('auth/company-login')
-   async loginCompany(@Request() req) {
-     return this.authService.login(req.user);
-   }
- 
+  @UseGuards(CompanyAuthGuard)
+  @Post('auth/company-login')
+  async loginCompany(@Request() req) {
+    return this.authService.companyLogin(req.user);
+  }
 
   @UseGuards(JwtAuthGuard)
   @Get('profile')
