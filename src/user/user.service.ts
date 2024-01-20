@@ -43,7 +43,7 @@ export class UserService {
 
 
   async findOne(email: string): Promise<User | null> {
-    return this.userRepository.findOne({ email });
+    return this.userRepository.findOne({ email: email });
   }
   
   async update(email: string, updateUserDto: UpdateUserDto) {
