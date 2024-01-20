@@ -48,7 +48,7 @@ export class AuthService {
   }
 
   async companyLogin(company: Partial<Company>) {
-    const payload = this.validateCompany(company.email, company.password);
+    const payload = await this.validateCompany(company.email, company.password);
 
     return {
       access_token: this.jwtService.sign(payload),
