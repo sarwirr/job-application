@@ -1,3 +1,4 @@
+import { Transform } from "class-transformer";
 import { IsNotEmpty, MaxLength, MinLength } from "class-validator";
 
 export class CreateUserDto 
@@ -19,6 +20,7 @@ export class CreateUserDto
     password : string;
 
     @IsNotEmpty()
+    @Transform(({ value }) => value.toLowerCase())
     email : string;
   
     @MinLength(3)

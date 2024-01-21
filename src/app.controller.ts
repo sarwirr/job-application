@@ -11,7 +11,6 @@ export class AppController {
   constructor(private authService: AuthService) {}
 
   @Post('auth/login')
-  @UsePipes(new ValidationPipe({ transform: true }))
   async loginUser(@Body() body: UserLoginDto) {
 
     return this.authService.userLogin(body);
@@ -19,7 +18,6 @@ export class AppController {
   }
 
   @Post('auth/company-login')
-  @UsePipes(new ValidationPipe({ transform: true }))
   async loginCompany(@Body() body: CompanyLoginDto) {
 
     return this.authService.companyLogin(body);
