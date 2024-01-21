@@ -6,9 +6,8 @@ async function bootstrap() {
 <<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
 =======
   
-  // Configure CORS here
   const corsOptions = {
-    origin: 'http://localhost:4200', // Replace with your actual client URL
+    origin: 'http://localhost:4200',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   };

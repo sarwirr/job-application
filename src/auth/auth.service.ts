@@ -3,8 +3,11 @@ import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { CompanyService } from 'src/company/company.service';
+
 import { User } from '../user/entities/user.entity';
 import { Company } from '../company/entities/company.entity';
+import { CompanyLoginDto } from '../company/dto/login-company.dto';
+import { UserLoginDto } from '../user/dto/login-company.dto';
 
 @Injectable()
 export class AuthService {
@@ -38,21 +41,21 @@ export class AuthService {
     return null;
   }
 
-  async userLogin(user: Partial<User>) {
+  async userLogin(user: UserLoginDto) {
     const payload = await this.validate(user.email, user.password);
 
-    return {
+    return payload ? {
       access_token: this.jwtService.sign(payload),
       user: user,
-    };
+    } : { message: 'Invalid email or password' };
   }
 
-  async companyLogin(company: Partial<Company>) {
-    const payload = await this.validateCompany(company.email, company.password);
+  async companyLogin(company: CompanyLoginDto) {
+    const payload = await this.validateCompany(company.companyEmail, company.companyPassword);
 
-    return {
+    return payload ? {
       access_token: this.jwtService.sign(payload),
       company: company,
-    };
+    } : { message: 'Invalid email or password' };
   }
 }
