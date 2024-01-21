@@ -16,10 +16,10 @@ export class CompanyService {
   }
   
  async register (createCompanyDto: CreateCompanyDto) {
-       const saltOrRounds = 10;
+    const saltOrRounds = 10;
     createCompanyDto.password = await bcrypt.hash(createCompanyDto.password, saltOrRounds);
-    return this.companyModel.create({ ...createCompanyDto, token: hat() });
 
+    return this.companyModel.create({ ...createCompanyDto, token: hat() });
   }
 
   async findAll(): Promise<Company[]> {

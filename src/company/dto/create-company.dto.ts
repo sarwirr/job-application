@@ -21,13 +21,16 @@ export class CreateCompanyDto {
 
   @IsOptional()
   @IsString()
+  @Transform(({ value }) => value.toLowerCase())
   website: string
 
   @IsNotEmpty()
   @IsString()
+  @Transform(({ value }) => value.toLowerCase())
   state: string
 
   @IsNotEmpty()
   @IsString()
+  @Transform(({ value }) => value.toLowerCase())
   country: string
 }

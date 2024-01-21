@@ -14,9 +14,9 @@ export class UserService {
   constructor(@InjectModel(User.name) private userRepository: Model<UserDocument>) { }
 
   async register(createUserDto: CreateUserDto) {
-
     const saltOrRounds = 10;
     createUserDto.password = await bcrypt.hash(createUserDto.password, saltOrRounds);
+    
     return this.userRepository.create({ ...createUserDto, token: hat() });
 
   }
