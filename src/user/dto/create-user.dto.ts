@@ -10,8 +10,6 @@ export class CreateUserDto
     @IsNotEmpty()
     lastname: string;
   
-    @MinLength(8)
-    @MaxLength(50)
     @IsNotEmpty()
     phoneNumber: string;
 
@@ -30,6 +28,6 @@ export class CreateUserDto
   
     @IsNotEmpty()
     gender: string;
-  
+
     profileImage: string;
 }

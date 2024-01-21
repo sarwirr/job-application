@@ -11,13 +11,9 @@ export class UpdateUserDto extends PartialType(CreateUserDto)
     @IsOptional()
     lastname: string;
   
-    @MinLength(8)
-    @MaxLength(50)
     @IsOptional()
     phoneNumber: string;
   
-    @MinLength(3)
-    @MaxLength(32)
     @IsOptional()
     dateBirth: string;
   
