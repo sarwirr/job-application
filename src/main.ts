@@ -5,9 +5,8 @@ import * as express from 'express';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   
-  // Configure CORS here
   const corsOptions = {
-    origin: 'http://localhost:4200', // Replace with your actual client URL
+    origin: 'http://localhost:4200',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   };
