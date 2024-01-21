@@ -19,6 +19,13 @@ export class CreateUserDto
 
     @IsNotEmpty()
     password : string;
+<<<<<<< HEAD
+=======
+
+    @IsNotEmpty()
+    @Transform(({ value }) => value.toLowerCase())
+    email : string;
+>>>>>>> a5fc2fa (Added transform Pipe to Email & Applied Pipes Globally)
   
     @MinLength(3)
     @MaxLength(32)

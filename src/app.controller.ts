@@ -31,12 +31,15 @@ export class AppController {
   @Post('auth/login')
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   async loginUser(@Body() body: UserLoginDto) {
 =======
   async loginUser(@Body() body) {
 >>>>>>> 7956da0 (Removed Unecessary Guard)
 =======
   @UsePipes(new ValidationPipe({ transform: true }))
+=======
+>>>>>>> a5fc2fa (Added transform Pipe to Email & Applied Pipes Globally)
   async loginUser(@Body() body: UserLoginDto) {
 
 >>>>>>> 55ecdad (Implemented DTO for Authentication Routes)
@@ -45,6 +48,7 @@ export class AppController {
   }
 
   @Post('auth/company-login')
+<<<<<<< HEAD
 <<<<<<< HEAD
   async loginCompany(@Body() body: CompanyLoginDto) {
     return this.authService.companyLogin(body);
@@ -61,6 +65,8 @@ export class AppController {
     return this.authService.companyRegister(body);
 =======
   @UsePipes(new ValidationPipe({ transform: true }))
+=======
+>>>>>>> a5fc2fa (Added transform Pipe to Email & Applied Pipes Globally)
   async loginCompany(@Body() body: CompanyLoginDto) {
 
     return this.authService.companyLogin(body);

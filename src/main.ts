@@ -1,10 +1,28 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 <<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
+<<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 <<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
+=======
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> Added transform Pipe to Email & Applied Pipes Globally
+import * as express from 'express';
+import { ValidationPipe } from '@nestjs/common';
+=======
+<<<<<<< HEAD
+>>>>>>> a5fc2fa (Added transform Pipe to Email & Applied Pipes Globally)
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+<<<<<<< HEAD
+<<<<<<< HEAD
+  app.useGlobalPipes(new ValidationPipe({ transform: true }));
+=======
 =======
 =======
 import * as express from 'express';
@@ -12,8 +30,12 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-<<<<<<< HEAD
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
+<<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
+>>>>>>> Added transform Pipe to Email & Applied Pipes Globally
+=======
+>>>>>>> 0bc9eba (Added transform Pipe to Email & Applied Pipes Globally)
+>>>>>>> a5fc2fa (Added transform Pipe to Email & Applied Pipes Globally)
 >>>>>>> Added transform Pipe to Email & Applied Pipes Globally
   
   const corsOptions = {
