@@ -9,7 +9,13 @@ export class CompanyController {
 
   @Post()
   create(@Body() createCompanyDto: CreateCompanyDto) {
-    return this.companyService.register(createCompanyDto);
+    try {
+      this.companyService.register(createCompanyDto);
+      return { "success": "success", "message": "Company created successfully" };
+    }
+    catch (err) {
+      return { "error": "error", "message": err.message };
+    }
   }
 
   @Get()

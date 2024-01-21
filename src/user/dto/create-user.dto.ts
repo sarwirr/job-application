@@ -14,18 +14,18 @@ export class CreateUserDto
     @MaxLength(50)
     @IsNotEmpty()
     phoneNumber: string;
-  
-
-    @IsNotEmpty()
-    password : string;
 
     @IsNotEmpty()
     @Transform(({ value }) => value.toLowerCase())
     email : string;
+
+    @IsNotEmpty()
+    password : string;
   
     @MinLength(3)
     @MaxLength(32)
     @IsNotEmpty()
+    @Transform(({ value }) => value.toLowerCase())
     address: string;
   
     @IsNotEmpty()
