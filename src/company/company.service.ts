@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreateCompanyDto } from './dto/create-company.dto';
 import { UpdateCompanyDto } from './dto/update-company.dto';
 import { InjectModel } from '@nestjs/mongoose';
@@ -11,15 +11,21 @@ const hat = require('hat');
 @Injectable()
 export class CompanyService {
 
-  constructor(@InjectModel(Company.name) private companyModel: Model<CompanyDocument>) {
-    
-  }
+  constructor(@InjectModel(Company.name) private companyModel: Model<CompanyDocument>) {}
   
- async register (createCompanyDto: CreateCompanyDto) {
+  async register (createCompanyDto: CreateCompanyDto) {
+    const testCompany = await this.findOneByEmail(createCompanyDto.email);
+    if (testCompany)
+      throw new HttpException("Company already exists", 400);
+
     const saltOrRounds = 10;
     createCompanyDto.password = await bcrypt.hash(createCompanyDto.password, saltOrRounds);
 
-    return this.companyModel.create({ ...createCompanyDto, token: hat() });
+    const result = await this.companyModel.create({ ...createCompanyDto, token: hat() });
+    if (result)
+      return {message: "Company Created", statusCode: 201}
+    else
+      throw new InternalServerErrorException();
   }
 
   async findAll(): Promise<Company[]> {
