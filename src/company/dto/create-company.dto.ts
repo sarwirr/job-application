@@ -1,4 +1,5 @@
 import { IsEmail, IsNotEmpty, IsOptional, IsString } from '@nestjs/class-validator'
+import { Transform } from 'class-transformer'
 
 export class CreateCompanyDto {
   @IsNotEmpty()
@@ -11,6 +12,7 @@ export class CreateCompanyDto {
 
   @IsNotEmpty()
   @IsEmail()
+  @Transform(({ value }) => value.toLowerCase())
   email: string
 
   @IsNotEmpty()
