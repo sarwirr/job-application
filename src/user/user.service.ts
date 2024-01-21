@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
@@ -14,11 +14,19 @@ export class UserService {
   constructor(@InjectModel(User.name) private userRepository: Model<UserDocument>) { }
 
   async register(createUserDto: CreateUserDto) {
+    const testUser = await this.findOne(createUserDto.email);
+    if (testUser)
+      throw new HttpException("User already exists", 400);
+    
     const saltOrRounds = 10;
     createUserDto.password = await bcrypt.hash(createUserDto.password, saltOrRounds);
-    
-    return this.userRepository.create({ ...createUserDto, token: hat() });
 
+    const result = await this.userRepository.create({ ...createUserDto, token: hat() });
+
+    if (result)
+      return {message: "User created successfully", statusCode: 201}
+      else
+        throw new InternalServerErrorException();
   }
 
   

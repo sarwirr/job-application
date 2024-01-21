@@ -10,13 +10,7 @@ export class UserController {
 
   @Post('register')
   create(@Body() createUserDto: CreateUserDto) {
-    try {
-      this.userService.register(createUserDto);
-      return { "success": "success", "message": "User created successfully" };
-    }
-    catch (err) {
-      return { "error": "error", "message": err.message };
-    }
+    return this.userService.register(createUserDto);
   }
 
   @UseGuards(JwtAuthGuard)
