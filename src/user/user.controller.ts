@@ -10,8 +10,15 @@ export class UserController {
 
   @Post('register')
   create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.register(createUserDto);
+    try {
+      this.userService.register(createUserDto);
+      return { "success": "success", "message": "User created successfully" };
+    }
+    catch (err) {
+      return { "error": "error", "message": err.message };
+    }
   }
+
   @UseGuards(JwtAuthGuard)
   @Get('findall')
   findAll() {
@@ -35,12 +42,12 @@ export class UserController {
     return this.userService.findnameofUserbyId(id);
   }
 
-  
   @UseGuards(JwtAuthGuard)
-  @Get(':email')
+  @Get('finduserbyemail:email')
   findOne(@Param('email') email :string) {
     return this.userService.findOne(email);
   }
+  
   @UseGuards(JwtAuthGuard)
   @Patch(':email')
   update(@Param('email') email: string, @Body() updateUserDto: UpdateUserDto) {

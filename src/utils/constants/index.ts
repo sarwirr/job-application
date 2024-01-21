@@ -18,8 +18,10 @@ export const SKILLS = [
     'gcp',
     'azure',
   ] as const
+
+  export const ROLES = [ 'user' , 'admin'] as const
   
-  export const GENDERS = ['male', 'female', 'transgender'] as const
+  export const GENDERS = [ 'not specified','male', 'female', 'transgender'] as const
   
   export const SERVICES = {
     AUTH_SERVICE: 'AUTH',

@@ -1,35 +1,34 @@
-import { Controller, Request,Get , Post, UseGuards } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Controller, Request,Get , Post, UseGuards, Body, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AuthService } from './auth/auth.service';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
-import {LocalAuthGuard} from './auth/local-auth.guard';
-import { CompanyAuthGuard } from './auth/company-auth.guard';
+import { UserLoginDto } from './user/dto/login-company.dto';
+import { CompanyLoginDto } from './company/dto/login-company.dto';
 
 require('dotenv').config(); 
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService,
-    private authService: AuthService) {}
-  
-  @UseGuards(LocalAuthGuard)
+  constructor(private authService: AuthService) {}
+
   @Post('auth/login')
-  async loginUser(@Request() req) {
-  
-    return this.authService.login(req.user);
+  @UsePipes(new ValidationPipe({ transform: true }))
+  async loginUser(@Body() body: UserLoginDto) {
+
+    return this.authService.userLogin(body);
+
   }
 
-   // New endpoint for company login
-   @UseGuards(CompanyAuthGuard)
-   @Post('auth/company-login')
-   async loginCompany(@Request() req) {
-     return this.authService.login(req.user);
-   }
- 
+  @Post('auth/company-login')
+  @UsePipes(new ValidationPipe({ transform: true }))
+  async loginCompany(@Body() body: CompanyLoginDto) {
+
+    return this.authService.companyLogin(body);
+  }
 
   @UseGuards(JwtAuthGuard)
   @Get('profile')
   getProfile(@Request() req) {
+    
     return req.user;
   }
 }

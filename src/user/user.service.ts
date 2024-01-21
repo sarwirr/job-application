@@ -27,8 +27,7 @@ export class UserService {
   }
 
   async findUserbyId(id: string): Promise<User> {
-    // console.log(id);
-    return this.userRepository.findOne({ _id :id}).populate('fileList').exec();
+    return this.userRepository.findOne({ _id :id}).exec();
   }
 
   async findnameofUserbyId(id: string) {
@@ -44,11 +43,9 @@ export class UserService {
 
 
   async findOne(email: string): Promise<User | null> {
-    return this.userRepository.findOne({ email });
+    return this.userRepository.findOne({ email: email });
   }
-
-
-
+  
   async update(email: string, updateUserDto: UpdateUserDto) {
 
     if (updateUserDto.password) {
@@ -63,4 +60,44 @@ export class UserService {
     return this.userRepository.findOneAndDelete({ email });
   }
 
-}
+    // get profile image
+    async getProfileImage(id: string): Promise<any> {
+      try {
+        return await this.userRepository.findById(id, { profileImage: 1 });
+      } catch (err) {
+        throw new Error(`Error getting profile image: ${err}`);
+      }
+    }
+    // delete profile image
+    async deleteProfileImage(id: string): Promise<any> {
+      try {
+        return await this.userRepository.findByIdAndUpdate(id, { profileImage: null }, { new: true });
+      } catch (err) {
+        throw new Error(`Error deleting profile image: ${err}`);
+      }
+    }
+  
+    async updateProfile(id: string, avatar: Express.Multer.File, updateProfileDto: any): Promise<any> {
+      let photo = this.profileImage(avatar);
+      try {
+        return await this.userRepository.findByIdAndUpdate(
+          id,
+          { ...updateProfileDto, profileImage: photo },
+          { new: true },
+        );
+      }
+      catch (err) {
+        throw new Error(`Error updating ${this.userRepository}: ${err}`);
+      }
+    }
+  
+    profileImage(avatar: Express.Multer.File): string {
+      let photo;
+      if (avatar) {
+        photo = avatar.path.replace('public', '').split('\\').join('/');
+      }
+      return photo;
+    }
+  
+  }
+
