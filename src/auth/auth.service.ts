@@ -3,14 +3,18 @@ import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { CompanyService } from 'src/company/company.service';
+
 import { User } from '../user/entities/user.entity';
 import { Company } from '../company/entities/company.entity';
 import { CompanyLoginDto } from '../company/dto/login-company.dto';
 import { UserLoginDto } from '../user/dto/login-company.dto';
+<<<<<<< HEAD
 import { CreateCompanyDto } from '../company/dto/create-company.dto';
 import { CreateUserDto } from '../user/dto/create-user.dto';
 
 const hat = require('hat');
+=======
+>>>>>>> 55ecdad (Implemented DTO for Authentication Routes)
 
 @Injectable()
 export class AuthService {
@@ -45,6 +49,7 @@ export class AuthService {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   async userLogin(user: UserLoginDto) {
     const payload = await this.validate(user.email, user.password);
 
@@ -54,17 +59,33 @@ export class AuthService {
     } : { message: 'Invalid email or password' };
 =======
   async userLogin(user: Partial<User>) {
+=======
+  async userLogin(user: UserLoginDto) {
+>>>>>>> 55ecdad (Implemented DTO for Authentication Routes)
     const payload = await this.validate(user.email, user.password);
 
-    return {
+    return payload ? {
       access_token: this.jwtService.sign(payload),
       user: user,
+<<<<<<< HEAD
     };
 >>>>>>> 7956da0 (Removed Unecessary Guard)
   }
 
   async userRegister(createUserDto: CreateUserDto) {
     return this.usersService.register(createUserDto);
+=======
+    } : { message: 'Invalid email or password' };
+  }
+
+  async companyLogin(company: CompanyLoginDto) {
+    const payload = await this.validateCompany(company.companyEmail, company.companyPassword);
+
+    return payload ? {
+      access_token: this.jwtService.sign(payload),
+      company: company,
+    } : { message: 'Invalid email or password' };
+>>>>>>> 55ecdad (Implemented DTO for Authentication Routes)
   }
 
   async companyLogin(company: CompanyLoginDto) {

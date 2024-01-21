@@ -22,10 +22,13 @@ async function bootstrap() {
 <<<<<<< HEAD
 =======
   
-  // Configure CORS here
   const corsOptions = {
+<<<<<<< HEAD
     origin: 'http://localhost:4200', // Replace with your actual client URL
 >>>>>>> 7956da0 (Removed Unecessary Guard)
+=======
+    origin: 'http://localhost:4200',
+>>>>>>> 55ecdad (Implemented DTO for Authentication Routes)
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   };
