@@ -42,6 +42,11 @@ export class CompanyService {
     return company ; 
   }
 
+  async findOneByName (name: string): Promise <Company>{
+    const company = (await this.companyModel.findOne({ name : name}));
+    return company ;
+  }
+
   async update(id: string, updateCompanyDto: UpdateCompanyDto) {
     
     if (updateCompanyDto.password) {
