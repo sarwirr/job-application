@@ -45,7 +45,8 @@ export class AuthService {
     const payload = await this.validate(user.email, user.password);
 
     return payload ? {
-      token: this.jwtService.sign(payload)
+      token: this.jwtService.sign(payload),
+      payload
     } : { message: 'Invalid email or password' };
   }
 
@@ -53,7 +54,8 @@ export class AuthService {
     const payload = await this.validateCompany(company.companyEmail, company.companyPassword);
 
     return payload ? {
-      token: this.jwtService.sign(payload)
+      token: this.jwtService.sign(payload),
+      payload
     } : { message: 'Invalid email or password' };
   }
 }

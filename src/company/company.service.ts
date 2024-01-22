@@ -43,7 +43,9 @@ export class CompanyService {
   }
 
   async findOneByName (name: string): Promise <Company>{
-    const company = (await this.companyModel.findOne({ name : name}));
+    console.log(name);
+    const company = await this.companyModel.findOne({ name : name});
+    console.log(company);
     return company ;
   }
 

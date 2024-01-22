@@ -15,14 +15,14 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   async validate(payload: any) {
     // Check if the payload is for a user
-    if (payload.hasOwnProperty("userId") ) {  
+    if (payload.hasOwnProperty("firstname") ) {  
       
       // Return the payload for users
       return { userId: payload.userId, username: payload.username, email: payload.email, roles: payload.roles };
     }
   
     // Check if the payload is for a company
-    if (payload.hasOwnProperty("companyId") ) {
+    if (payload.hasOwnProperty("name") ) {
     
       // Return the payload for companies
       return { companyId: payload.companyId, companyName: payload.name, companyEmail: payload.email, companyRoles: payload.roles };
