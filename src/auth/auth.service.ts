@@ -56,6 +56,7 @@ export class AuthService {
     return payload ? {
       token: this.jwtService.sign(payload),
       payload
+<<<<<<< HEAD
     } : { message: 'Invalid email or password' };
 =======
   async userLogin(user: Partial<User>) {
@@ -75,6 +76,8 @@ export class AuthService {
   async userRegister(createUserDto: CreateUserDto) {
     return this.usersService.register(createUserDto);
 =======
+=======
+>>>>>>> 2020039 (corrected payload bug)
     } : { message: 'Invalid email or password' };
   }
 
@@ -82,6 +85,7 @@ export class AuthService {
     const payload = await this.validateCompany(company.companyEmail, company.companyPassword);
 
     return payload ? {
+<<<<<<< HEAD
       access_token: this.jwtService.sign(payload),
       company: company,
     } : { message: 'Invalid email or password' };
@@ -92,6 +96,8 @@ export class AuthService {
     const payload = await this.validateCompany(company.companyEmail, company.companyPassword);
 
     return payload ? {
+=======
+>>>>>>> 2020039 (corrected payload bug)
       token: this.jwtService.sign(payload),
       payload
     } : { message: 'Invalid email or password' };

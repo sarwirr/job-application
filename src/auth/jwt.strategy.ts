@@ -17,6 +17,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     // Check if the payload is for a user
 <<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
 <<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
+<<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
     if (payload.hasOwnProperty("userId") ) {
       console.log(payload.userId, payload.username, payload.email, payload.roles);
   
@@ -24,6 +25,22 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     if (payload.hasOwnProperty("userId") ) {  
 =======
     if (payload.hasOwnProperty("firstname") ) {  
+>>>>>>> corrected payload bug
+=======
+<<<<<<< HEAD
+    if (payload.hasOwnProperty("firstname") ) {  
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+    if (payload.hasOwnProperty("userId") ) {
+      console.log(payload.userId, payload.username, payload.email, payload.roles);
+  
+=======
+    if (payload.hasOwnProperty("userId") ) {  
+=======
+    if (payload.hasOwnProperty("firstname") ) {  
+>>>>>>> 050b61a (corrected payload bug)
+>>>>>>> 2020039 (corrected payload bug)
 >>>>>>> corrected payload bug
       
 >>>>>>> Updated Some Any Return Types

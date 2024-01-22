@@ -41,10 +41,12 @@ export class AppController {
 =======
 >>>>>>> a5fc2fa (Added transform Pipe to Email & Applied Pipes Globally)
   async loginUser(@Body() body: UserLoginDto) {
+<<<<<<< HEAD
 
 >>>>>>> 55ecdad (Implemented DTO for Authentication Routes)
+=======
+>>>>>>> 2020039 (corrected payload bug)
     return this.authService.userLogin(body);
-
   }
 
   @Post('auth/company-login')
@@ -68,7 +70,6 @@ export class AppController {
 =======
 >>>>>>> a5fc2fa (Added transform Pipe to Email & Applied Pipes Globally)
   async loginCompany(@Body() body: CompanyLoginDto) {
-
     return this.authService.companyLogin(body);
 >>>>>>> 55ecdad (Implemented DTO for Authentication Routes)
   }

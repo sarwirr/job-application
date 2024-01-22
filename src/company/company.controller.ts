@@ -2,12 +2,28 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { CompanyService } from './company.service';
 import { UpdateCompanyDto } from './dto/update-company.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+<<<<<<< HEAD
 import { Request } from '@nestjs/common';
 
+=======
+
+
+
+
+>>>>>>> 2020039 (corrected payload bug)
 @UseGuards(JwtAuthGuard)
 @Controller('company')
 export class CompanyController {
   constructor(private readonly companyService: CompanyService) {}
+<<<<<<< HEAD
+=======
+
+  @Post()
+  create(@Body() createCompanyDto: CreateCompanyDto) {
+    return this.companyService.register(createCompanyDto);
+  }
+
+>>>>>>> 2020039 (corrected payload bug)
   
   @Get()
   findAll() {
