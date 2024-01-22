@@ -16,11 +16,15 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   async validate(payload: any) {
     // Check if the payload is for a user
 <<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
+<<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
     if (payload.hasOwnProperty("userId") ) {
       console.log(payload.userId, payload.username, payload.email, payload.roles);
   
 =======
     if (payload.hasOwnProperty("userId") ) {  
+=======
+    if (payload.hasOwnProperty("firstname") ) {  
+>>>>>>> corrected payload bug
       
 >>>>>>> Updated Some Any Return Types
       // Return the payload for users
@@ -28,7 +32,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     }
   
     // Check if the payload is for a company
-    if (payload.hasOwnProperty("companyId") ) {
+    if (payload.hasOwnProperty("name") ) {
     
       // Return the payload for companies
       return { companyId: payload.companyId, companyName: payload.name, companyEmail: payload.email, companyRoles: payload.roles };

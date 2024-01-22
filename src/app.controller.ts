@@ -12,14 +12,11 @@ export class AppController {
 
   @Post('auth/login')
   async loginUser(@Body() body: UserLoginDto) {
-
     return this.authService.userLogin(body);
-
   }
 
   @Post('auth/company-login')
   async loginCompany(@Body() body: CompanyLoginDto) {
-
     return this.authService.companyLogin(body);
   }
 
