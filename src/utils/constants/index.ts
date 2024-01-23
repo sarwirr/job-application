@@ -19,7 +19,11 @@ export const SKILLS = [
     'azure',
   ] as const
   
+<<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
   export const GENDERS = ['male', 'female', 'transgender'] as const
+=======
+  export const GENDERS = [ 'not specified','male', 'female'] as const
+>>>>>>> corrected bugs
   
   export const SERVICES = {
     AUTH_SERVICE: 'AUTH',
@@ -64,3 +68,5 @@ export const SKILLS = [
     RECIEVED: 'recieved',
     SEEN: 'seen',
   } as const
+
+  export const REMUNERATION = ['UNPAID' , 'PAID'];
