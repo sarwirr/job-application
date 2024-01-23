@@ -15,14 +15,13 @@ export class JobService {
   private readonly cs : CompanyService,){}
 
 
-  async create(createJobDto: CreateJobDto , id:any) {
+  async create(createJobDto: CreateJobDto , id:string) {
     const company = await this.cs.findOne(id); 
     const createdjob = new this.jobRepository({...createJobDto, recruiter: company._id.toString()});
     const savedjob = await createdjob.save();
     company.postings.push(savedjob);
     await this.cs.update(company._id, { postings : company.postings} as UpdateJobDto );
     return savedjob;
-
   } 
 
   async findAll(): Promise<Job[]> {
@@ -30,16 +29,15 @@ export class JobService {
     return this.jobRepository.find().exec();
   }
 
-  async findOne(id: string) {
-    console.log(id)
+  async findOne(id: string) : Promise<Job> {
     const job = await this.jobRepository.findOne({ _id: id}).exec();
     return job;
   }
 
   async getcompanyIdbyJobId(id: string): Promise<Company>{
-    console.log(id);
+    
     const job = await this.jobRepository.findOne({ _id : id}).exec();
-    console.log(job);
+   
     return job.recruiter ;
 
   }

@@ -7,14 +7,16 @@ import { Model } from 'mongoose';
 import { UserService } from 'src/user/user.service';
 import { HttpService } from "@nestjs/axios";
 import { JobService } from 'src/job/job.service';
-import { JobDocument } from 'src/job/entities/job.entity';
+import { Job, JobDocument } from 'src/job/entities/job.entity';
 import { UserDocument } from 'src/user/entities/user.entity';
 import { stringify } from 'flatted';
 import * as fs from 'fs';
+import { UpdateJobDto } from 'src/job/dto/update-job.dto';
 
 @Injectable()
 export class ApplicationService {
-  constructor(@InjectModel(Application.name) private applicationModel: Model<ApplicationDocument>,
+  constructor(@InjectModel(Job.name) private jobRepository: Model<JobDocument>,
+  @InjectModel(Application.name) private applicationModel: Model<ApplicationDocument>,
   private httpService: HttpService,
   private readonly us : UserService,
   private readonly js : JobService,
@@ -24,40 +26,25 @@ export class ApplicationService {
   async apply(jobId: string, userId:string , @UploadedFile() cvfile: Express.Multer.File) {
     // Find the job by its id
     const job = await this.js.findOne(jobId);
-    
-    console.log(job);
-
-    // Find the user by its id
-    console.log("userid")
-    console.log(userId);
     const user = await this.us.findUserbyId(userId);
-    console.log(user);
+    
 
-    // Save the CV file to a designated folder or cloud storage (you can use a file storage service like AWS S3, Google Cloud Storage, etc.)
+    // Save the CV file to a designated folder or cloud storage
     // Here, you would need to implement the file upload logic based on your storage preference.
-
     // Create the application
     const applicationData: Partial<Application> = {
       job: job,
       user: user,
-      cv: cvfile.filename, // Save the filename or the URL of the uploaded CV in the database
-      // You can also store additional information about the application, such as application status, date, etc.
-    };
+      cv: cvfile.filename,};
 
     const application = new this.applicationModel(applicationData);
-    console.log("application :")
-    console.log(application)
     const savedApplication = await application.save();
-
     // Update the job with the new application details
     job.applications.push(savedApplication);
-    await job.save();
-
+    await this.js.update(job._id, { applications : job.applications} as UpdateJobDto );
+    
+    //Update the applied job to the user
     user.appliedJobs.push(savedApplication);
-    console.log(savedApplication);
-
-    // user.appliedJobs.push(savedApplication);
-
     return this.parseCircularJson(savedApplication); // Serialize the object excluding circular references
   }
    

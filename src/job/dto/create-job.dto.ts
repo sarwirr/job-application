@@ -1,17 +1,13 @@
-import { PaymentDto } from './payment.dto'
-import { Type } from '@nestjs/class-transformer'
+
 import {
   IsArray,
-  IsDefined,
   IsEnum,
   IsNotEmpty,
-  IsNotEmptyObject,
   IsNumberString,
   IsOptional,
   IsString,
-  ValidateNested,
 } from '@nestjs/class-validator'
-import { JOB_TYPES , SKILLS} from 'src/utils/constants'
+import { JOB_TYPES , REMUNERATION, SKILLS} from 'src/utils/constants'
 import { JobTypeLowerCase , Skill } from 'src/utils/types'
 
 export class CreateJobDto {
@@ -28,7 +24,7 @@ export class CreateJobDto {
   body: string
 
   @IsOptional()
-  @IsNumberString()
+  @IsEnum(REMUNERATION.map(type => type.toLowerCase()))
   pay: string
 
   @IsOptional()
@@ -40,9 +36,4 @@ export class CreateJobDto {
   @IsEnum(SKILLS, { each: true })
   tags: Skill[]
 
-  @IsDefined()
-  @IsNotEmptyObject()
-  @ValidateNested()
-  @Type(() => PaymentDto)
-  payment: PaymentDto
 }

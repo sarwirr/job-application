@@ -18,14 +18,14 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     if (payload.hasOwnProperty("firstname") ) {  
       
       // Return the payload for users
-      return { userId: payload.userId, username: payload.username, email: payload.email, roles: payload.roles };
+      return { userId: payload._id, username: payload.username, email: payload.email, roles: payload.roles };
     }
   
     // Check if the payload is for a company
     if (payload.hasOwnProperty("name") ) {
     
       // Return the payload for companies
-      return { companyId: payload.companyId, companyName: payload.name, companyEmail: payload.email, companyRoles: payload.roles };
+      return { companyId: payload._id, companyName: payload.name, companyEmail: payload.email, companyRoles: payload.roles };
     }
   
     // If the payload does not match any expected format, return null or throw an error

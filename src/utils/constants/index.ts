@@ -21,7 +21,7 @@ export const SKILLS = [
 
   export const ROLES = [ 'user' , 'admin'] as const
   
-  export const GENDERS = [ 'not specified','male', 'female', 'transgender'] as const
+  export const GENDERS = [ 'not specified','male', 'female'] as const
   
   export const SERVICES = {
     AUTH_SERVICE: 'AUTH',
@@ -66,3 +66,5 @@ export const SKILLS = [
     RECIEVED: 'recieved',
     SEEN: 'seen',
   } as const
+
+  export const REMUNERATION = ['UNPAID' , 'PAID'];
