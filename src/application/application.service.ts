@@ -45,7 +45,9 @@ export class ApplicationService {
     
     //Update the applied job to the user
     user.appliedJobs.push(savedApplication);
-    return this.parseCircularJson(savedApplication); // Serialize the object excluding circular references
+    await this.us.update(userId, { appliedJobs : user.appliedJobs} as UserDocument );
+    return this.parseCircularJson(savedApplication);
+     // Serialize the object excluding circular references
   }
    
   private parseCircularJson(obj: any): any {
@@ -54,7 +56,7 @@ export class ApplicationService {
 
 
 
-   async findall(){
+   async findall(): Promise<Application[]>{
     return await this.applicationModel.find();
   }
 
