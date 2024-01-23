@@ -15,6 +15,7 @@ export class JobService {
   private readonly companyService : CompanyService,){}
 
 
+<<<<<<< HEAD
   async create(createJobDto: CreateJobDto) {
     const company = await this.companyService.findOne(createJobDto.recruiter);
     if (company) {
@@ -31,6 +32,15 @@ export class JobService {
       return savedjob;
     } else
       throw new BadRequestException('Company does not exist');
+=======
+  async create(createJobDto: CreateJobDto , id:string) {
+    const company = await this.cs.findOne(id); 
+    const createdjob = new this.jobRepository({...createJobDto, recruiter: company._id.toString()});
+    const savedjob = await createdjob.save();
+    company.postings.push(savedjob);
+    await this.cs.update(company._id, { postings : company.postings} as UpdateJobDto );
+    return savedjob;
+>>>>>>> 1978981 (corrected bugs)
   } 
 
   async findAll(): Promise<Job[]> {
@@ -38,12 +48,22 @@ export class JobService {
   }
 
   async findOne(id: string) : Promise<Job> {
+<<<<<<< HEAD
     const job = await this.jobRepository.findOne({ _id: id}).populate('recruiter').exec();
+=======
+    const job = await this.jobRepository.findOne({ _id: id}).exec();
+>>>>>>> 1978981 (corrected bugs)
     return job;
   }
 
   async getcompanyIdbyJobId(id: string): Promise<Company>{
+<<<<<<< HEAD
     const job = await this.findOne(id);
+=======
+    
+    const job = await this.jobRepository.findOne({ _id : id}).exec();
+   
+>>>>>>> 1978981 (corrected bugs)
     return job.recruiter ;
 
   }

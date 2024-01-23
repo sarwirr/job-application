@@ -9,6 +9,10 @@ import { JobService } from 'src/job/job.service';
 import { Job, JobDocument } from 'src/job/entities/job.entity';
 import { UserDocument } from 'src/user/entities/user.entity';
 import { stringify } from 'flatted';
+<<<<<<< HEAD
+=======
+import * as fs from 'fs';
+>>>>>>> 1978981 (corrected bugs)
 import { UpdateJobDto } from 'src/job/dto/update-job.dto';
 
 @Injectable()
@@ -25,14 +29,26 @@ export class ApplicationService {
 
     // Find the job by its id
     const job = await this.js.findOne(jobId);
+<<<<<<< HEAD
     // Find the user by its id
     const user = await this.us.findUserbyId(userId);
+=======
+    const user = await this.us.findUserbyId(userId);
+    
+
+    // Save the CV file to a designated folder or cloud storage
+    // Here, you would need to implement the file upload logic based on your storage preference.
+>>>>>>> 1978981 (corrected bugs)
     // Create the application
     const applicationData: Partial<Application> = {
       job: job,
       user: user,
       cv: cvfile.filename,};
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 1978981 (corrected bugs)
     const application = new this.applicationModel(applicationData);
     const savedApplication = await application.save();
     // Update the job with the new application details
@@ -41,10 +57,14 @@ export class ApplicationService {
     
     //Update the applied job to the user
     user.appliedJobs.push(savedApplication);
+<<<<<<< HEAD
     await this.us.update(user.email, { appliedJobs : user.appliedJobs} as UserDocument , user._id);
     
     return this.parseCircularJson(savedApplication);
      // Serialize the object excluding circular references
+=======
+    return this.parseCircularJson(savedApplication); // Serialize the object excluding circular references
+>>>>>>> 1978981 (corrected bugs)
   }
   
 

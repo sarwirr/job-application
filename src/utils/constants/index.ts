@@ -25,9 +25,21 @@ export const SKILLS = [
 >>>>>>> changed role for company
   
 <<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
+<<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
   export const GENDERS = ['male', 'female', 'transgender'] as const
 =======
   export const GENDERS = [ 'not specified','male', 'female'] as const
+>>>>>>> corrected bugs
+=======
+<<<<<<< HEAD
+  export const GENDERS = [ 'not specified','male', 'female'] as const
+=======
+<<<<<<< HEAD
+  export const GENDERS = ['male', 'female', 'transgender'] as const
+=======
+  export const GENDERS = [ 'not specified','male', 'female'] as const
+>>>>>>> a42877a (corrected bugs)
+>>>>>>> 1978981 (corrected bugs)
 >>>>>>> corrected bugs
   
   export const SERVICES = {

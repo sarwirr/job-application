@@ -40,6 +40,11 @@ export class Job {
   })
   applications: Application[];
 
+<<<<<<< HEAD
+=======
+  @Prop({ default: [], ref: 'Chat' })
+  chats?: []
+>>>>>>> 1978981 (corrected bugs)
 }
 
 export const JobSchema = SchemaFactory.createForClass(Job);
