@@ -43,6 +43,11 @@ export class ApplicationController {
     return this.applicationService.findall();
   }
 
+  @Get('findappliedJobsbyuser')
+  findappliedJobs(@Request() req) : Promise <Application[]>{
+    return this.applicationService.findappliedJobs(req.user.userId);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) : Promise <Application> {
     return this.applicationService.findOne(id);

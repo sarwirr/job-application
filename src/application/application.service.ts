@@ -79,4 +79,11 @@ export class ApplicationService {
   remove(id: string) {
     return `This action removes a #${id} application`;
   }
+
+  async findappliedJobs(userId: string) {
+    const user = await this.us.findUserbyId(userId);
+    const appliedJobs = user.appliedJobs;
+    return appliedJobs;
+  }
+  
 }
