@@ -1,13 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { CompanyService } from 'src/company/company.service';
-
 import { User } from '../user/entities/user.entity';
 import { Company } from '../company/entities/company.entity';
 import { CompanyLoginDto } from '../company/dto/login-company.dto';
 import { UserLoginDto } from '../user/dto/login-company.dto';
+import { CreateCompanyDto } from '../company/dto/create-company.dto';
+import { CreateUserDto } from '../user/dto/create-user.dto';
+
+const hat = require('hat');
 
 @Injectable()
 export class AuthService {
@@ -50,6 +53,10 @@ export class AuthService {
     } : { message: 'Invalid email or password' };
   }
 
+  async userRegister(createUserDto: CreateUserDto) {
+    return this.usersService.register(createUserDto);
+  }
+
   async companyLogin(company: CompanyLoginDto) {
     const payload = await this.validateCompany(company.companyEmail, company.companyPassword);
 
@@ -58,4 +65,9 @@ export class AuthService {
       payload
     } : { message: 'Invalid email or password' };
   }
+
+  async companyRegister(createCompanyDto: CreateCompanyDto) {
+    return this.companyService.register(createCompanyDto);
+  }
+
 }
