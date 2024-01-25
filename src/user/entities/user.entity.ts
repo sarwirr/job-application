@@ -22,6 +22,11 @@ export  class User {
     lastname: string;
 
     @Prop({
+        required: false
+    })
+    description: string;
+
+    @Prop({
         required: true
     })
     phoneNumber: string;
