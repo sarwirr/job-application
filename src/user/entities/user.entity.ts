@@ -16,7 +16,18 @@ export  class User {
     @Prop()
     lastname: string;
 
+<<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
     @Prop()
+=======
+    @Prop({
+        required: false
+    })
+    description: string;
+
+    @Prop({
+        required: true
+    })
+>>>>>>> added a description field for user
     phoneNumber: string;
 
     @Prop()
