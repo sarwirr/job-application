@@ -4,8 +4,17 @@ import mongoose, {HydratedDocument } from 'mongoose';
 import { Application} from 'src/application/entities/application.entity';
 import { Gender } from 'src/utils/types';
 <<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
+<<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
 import { Exclude } from 'class-transformer';
 =======
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+import { Exclude } from 'class-transformer';
+=======
+>>>>>>> c6e18d8 (added exp and education to user)
+>>>>>>> added exp and education to user
 import { GENDERS, ROLES } from 'src/utils/constants';
 
 type experienceAndEducationElement = {
@@ -17,6 +26,13 @@ type experienceAndEducationElement = {
     description: string;
   };
   
+<<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
+>>>>>>> added exp and education to user
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 29427ba (added exp and education to user)
+>>>>>>> c6e18d8 (added exp and education to user)
 >>>>>>> added exp and education to user
 export type UserDocument = HydratedDocument<User>;
 

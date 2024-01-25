@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { HttpException, Injectable, UploadedFile } from '@nestjs/common';
+=======
+import { Injectable, UploadedFile } from '@nestjs/common';
+>>>>>>> c6e18d8 (added exp and education to user)
 import { UpdateApplicationDto } from './dto/update-application.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Application, ApplicationDocument } from './entities/application.entity';
@@ -10,9 +14,12 @@ import { Job, JobDocument } from 'src/job/entities/job.entity';
 import { UserDocument } from 'src/user/entities/user.entity';
 import { stringify } from 'flatted';
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import * as fs from 'fs';
 >>>>>>> 1978981 (corrected bugs)
+=======
+>>>>>>> c6e18d8 (added exp and education to user)
 import { UpdateJobDto } from 'src/job/dto/update-job.dto';
 
 @Injectable()

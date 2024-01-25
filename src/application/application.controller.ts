@@ -19,6 +19,7 @@ export class ApplicationController {
 
  
 <<<<<<< HEAD
+<<<<<<< HEAD
   @Post(':jobid')
     @UseInterceptors(FileInterceptor('file', {storage: diskStorage({destination :'/home/sarwir/projects/job-application/filesuploads',filename:(req,file,cb)=>{
     cb(null, `${file.originalname}`)}})})) 
@@ -28,6 +29,9 @@ export class ApplicationController {
 =======
 =======
     @Post(':jobid')
+=======
+  @Post(':jobid')
+>>>>>>> c6e18d8 (added exp and education to user)
     @UseInterceptors(FileInterceptor('file', {storage: diskStorage({destination :'/home/sarwir/projects/job-application/filesuploads',filename:(req,file,cb)=>{
     cb(null, `${file.originalname}`)}})})) 
     async create(@Request() req,@Param('jobid') jobId: string, @UploadedFile() file: Express.Multer.File) {  
