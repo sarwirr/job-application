@@ -49,14 +49,19 @@ export class JobService {
 
   async findOne(id: string) : Promise<Job> {
 <<<<<<< HEAD
+<<<<<<< HEAD
     const job = await this.jobRepository.findOne({ _id: id}).populate('recruiter').exec();
 =======
     const job = await this.jobRepository.findOne({ _id: id}).exec();
 >>>>>>> 1978981 (corrected bugs)
+=======
+    const job = await this.jobRepository.findOne({ _id: id}).populate('recruiter').exec();
+>>>>>>> 54c40b3 (tested routes and corrected bugs)
     return job;
   }
 
   async getcompanyIdbyJobId(id: string): Promise<Company>{
+<<<<<<< HEAD
 <<<<<<< HEAD
     const job = await this.findOne(id);
 =======
@@ -64,6 +69,9 @@ export class JobService {
     const job = await this.jobRepository.findOne({ _id : id}).exec();
    
 >>>>>>> 1978981 (corrected bugs)
+=======
+    const job = await this.findOne(id);
+>>>>>>> 54c40b3 (tested routes and corrected bugs)
     return job.recruiter ;
 
   }

@@ -30,6 +30,7 @@ export class ApplicationService {
     // Find the job by its id
     const job = await this.js.findOne(jobId);
 <<<<<<< HEAD
+<<<<<<< HEAD
     // Find the user by its id
     const user = await this.us.findUserbyId(userId);
 =======
@@ -39,16 +40,24 @@ export class ApplicationService {
     // Save the CV file to a designated folder or cloud storage
     // Here, you would need to implement the file upload logic based on your storage preference.
 >>>>>>> 1978981 (corrected bugs)
+=======
+    // Find the user by its id
+    const user = await this.us.findUserbyId(userId);
+>>>>>>> 54c40b3 (tested routes and corrected bugs)
     // Create the application
     const applicationData: Partial<Application> = {
       job: job,
       user: user,
       cv: cvfile.filename,};
 <<<<<<< HEAD
+<<<<<<< HEAD
     
 =======
 
 >>>>>>> 1978981 (corrected bugs)
+=======
+    
+>>>>>>> 54c40b3 (tested routes and corrected bugs)
     const application = new this.applicationModel(applicationData);
     const savedApplication = await application.save();
     // Update the job with the new application details
@@ -58,7 +67,11 @@ export class ApplicationService {
     //Update the applied job to the user
     user.appliedJobs.push(savedApplication);
 <<<<<<< HEAD
+<<<<<<< HEAD
     await this.us.update(user.email, { appliedJobs : user.appliedJobs} as UserDocument , user._id);
+=======
+    await this.us.update(user.email, { appliedJobs : user.appliedJobs} as UserDocument );
+>>>>>>> 54c40b3 (tested routes and corrected bugs)
     
     return this.parseCircularJson(savedApplication);
      // Serialize the object excluding circular references
@@ -66,12 +79,16 @@ export class ApplicationService {
     return this.parseCircularJson(savedApplication); // Serialize the object excluding circular references
 >>>>>>> 1978981 (corrected bugs)
   }
+<<<<<<< HEAD
   
+=======
+>>>>>>> 54c40b3 (tested routes and corrected bugs)
 
   private parseCircularJson(obj: any): any {
     return JSON.parse(stringify(obj));
   }
    
+<<<<<<< HEAD
 
   async getUserInfo(userId: string) {
   const user = await this.us.findUserbyId(userId);
@@ -86,6 +103,8 @@ export class ApplicationService {
   }
   
   }
+=======
+>>>>>>> 54c40b3 (tested routes and corrected bugs)
    async findall(): Promise<Application[]>{
     return await this.applicationModel.find();
   }

@@ -79,8 +79,17 @@ export class UserService {
   }
 
 <<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
+<<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
 }
 =======
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+}
+=======
+>>>>>>> 54c40b3 (tested routes and corrected bugs)
+>>>>>>> tested routes and corrected bugs
     // get profile image
     async getProfileImage(id: string): Promise<string> {
       try {
@@ -99,7 +108,11 @@ export class UserService {
 
     }
   
+<<<<<<< HEAD
     async updateProfile(id: string, avatar: Express.Multer.File, updateProfileDto: any): Promise<User> {
+=======
+    async updateProfile(id: string, avatar: Express.Multer.File, updateProfileDto: any): Promise<any> {
+>>>>>>> 54c40b3 (tested routes and corrected bugs)
       let photo = this.profileImage(avatar);
       try {
         return await this.userRepository.findByIdAndUpdate(
@@ -123,4 +136,11 @@ export class UserService {
   
   }
 
+<<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
+>>>>>>> tested routes and corrected bugs
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ed688ea (tested routes and corrected bugs)
+>>>>>>> 54c40b3 (tested routes and corrected bugs)
 >>>>>>> tested routes and corrected bugs
