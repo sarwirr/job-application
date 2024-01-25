@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
 import { Job, JobDocument } from './entities/job.entity';
@@ -12,16 +12,25 @@ export class JobService {
 
   constructor(@InjectModel(Job.name) private jobRepository: Model<JobDocument>,
   @InjectModel(Company.name) private companyRepository: Model<CompanyDocument>,
-  private readonly cs : CompanyService,){}
+  private readonly companyService : CompanyService,){}
 
 
-  async create(createJobDto: CreateJobDto , id:string) {
-    const company = await this.cs.findOne(id); 
-    const createdjob = new this.jobRepository({...createJobDto, recruiter: company._id.toString()});
-    const savedjob = await createdjob.save();
-    company.postings.push(savedjob);
-    await this.cs.update(company._id, { postings : company.postings} as UpdateJobDto );
-    return savedjob;
+  async create(createJobDto: CreateJobDto) {
+    const company = await this.companyService.findOne(createJobDto.recruiter);
+    if (company) {
+      const createdjob = new this.jobRepository({...createJobDto, recruiter: company._id.toString()});
+
+      const checkJob = await this.jobRepository.findOne({title: createJobDto.title, recruiter: company._id.toString()});
+      if (checkJob)
+        throw new ConflictException('Job already exists');
+
+      const savedjob = await createdjob.save();
+      company.postings.push(savedjob);
+      
+      await this.companyService.update(company._id, { postings : company.postings} as UpdateJobDto );
+      return savedjob;
+    } else
+      throw new BadRequestException('Company does not exist');
   } 
 
   async findAll(): Promise<Job[]> {
