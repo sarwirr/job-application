@@ -44,7 +44,7 @@ export class UserService {
    
   }
 
-  async showmeroles(id: string){
+  async showmeroles(id: string) {
     const user = await this.userRepository.findOne({ _id :id});
     return ({roles: user.role});
   }
@@ -69,7 +69,7 @@ export class UserService {
   }
 
     // get profile image
-    async getProfileImage(id: string): Promise<any> {
+    async getProfileImage(id: string): Promise<string> {
       try {
         return await this.userRepository.findById(id, { profileImage: 1 });
       } catch (err) {
@@ -77,12 +77,13 @@ export class UserService {
       }
     }
     // delete profile image
-    async deleteProfileImage(id: string): Promise<any> {
+    async deleteProfileImage(id: string){
       try {
         return await this.userRepository.findByIdAndUpdate(id, { profileImage: null }, { new: true });
       } catch (err) {
         throw new Error(`Error deleting profile image: ${err}`);
       }
+
     }
   
     async updateProfile(id: string, avatar: Express.Multer.File, updateProfileDto: any): Promise<any> {

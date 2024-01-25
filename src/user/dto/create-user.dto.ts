@@ -26,7 +26,5 @@ export class CreateUserDto
     @Transform(({ value }) => value.toLowerCase())
     address: string;
   
-    @IsNotEmpty()
-    gender: string;
-    profileImage: string;
+    
 }

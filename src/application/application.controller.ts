@@ -19,13 +19,6 @@ export class ApplicationController {
     @UseInterceptors(FileInterceptor('file', {storage: diskStorage({destination :'/home/sarwir/projects/job-application/filesuploads',filename:(req,file,cb)=>{
     cb(null, `${file.originalname}`)}})})) 
     async create(@Request() req,@Param('jobid') jobId: string, @UploadedFile() file: Express.Multer.File) {  
-      // Fetch the Job entity using the jobId to get the company ID.
-      const job = await this.jobService.findOne(jobId);
-    
-      // Get the company ID from the Job entity.
-      const companyId = await this.jobService.getcompanyIdbyJobId(jobId).toString();
-      const recuiter = job.recruiter ; 
-      
     return this.applicationService.apply(jobId,req.user.userId,file);
     }
 

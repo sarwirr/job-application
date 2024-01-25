@@ -38,14 +38,12 @@ export class CompanyService {
   }
 
   async findOneByEmail (email: string): Promise <Company>{
-    const company = (await this.companyModel.findOne({ email : email}));
+    const company = await this.companyModel.findOne({ email : email});
     return company ; 
   }
 
   async findOneByName (name: string): Promise <Company>{
-    console.log(name);
     const company = await this.companyModel.findOne({ name : name});
-    console.log(company);
     return company ;
   }
 
