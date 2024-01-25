@@ -31,6 +31,10 @@ export class CreateJobDto {
   @IsEnum(JOB_TYPES.map(type => type.toLowerCase()))
   type: JobTypeLowerCase
 
+  @IsNotEmpty()
+  @IsString()
+  recruiter: string
+
   @IsOptional()
   @IsArray()
   @IsEnum(SKILLS, { each: true })

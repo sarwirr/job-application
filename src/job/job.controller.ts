@@ -11,9 +11,8 @@ export class JobController {
   constructor(private readonly jobService: JobService) {}
 
   @Post()
-  create(@Body() createJobDto: CreateJobDto, @Request() req) {
-    console.log(req);
-    return this.jobService.create(createJobDto, req.user.companyId);
+  create(@Body() createJobDto: CreateJobDto) {
+    return this.jobService.create(createJobDto);
   }
 
   @Get()
