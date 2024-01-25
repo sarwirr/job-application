@@ -28,6 +28,5 @@ export class CreateUserDto
   
     @IsNotEmpty()
     gender: string;
-
     profileImage: string;
 }
