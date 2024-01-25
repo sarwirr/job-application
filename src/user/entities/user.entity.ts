@@ -31,8 +31,17 @@ export  class User {
     lastname: string;
 
 <<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
+<<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
     @Prop()
 =======
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    @Prop()
+=======
+>>>>>>> 8902e9f (added a description field for user)
+>>>>>>> added a description field for user
     @Prop({
         required: false
     })
@@ -41,6 +50,13 @@ export  class User {
     @Prop({
         required: true
     })
+<<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
+>>>>>>> added a description field for user
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 2226c22 (added a description field for user)
+>>>>>>> 8902e9f (added a description field for user)
 >>>>>>> added a description field for user
     phoneNumber: string;
 
