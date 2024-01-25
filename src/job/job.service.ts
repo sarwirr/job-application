@@ -25,19 +25,16 @@ export class JobService {
   } 
 
   async findAll(): Promise<Job[]> {
-
     return this.jobRepository.find().exec();
   }
 
   async findOne(id: string) : Promise<Job> {
-    const job = await this.jobRepository.findOne({ _id: id}).exec();
+    const job = await this.jobRepository.findOne({ _id: id}).populate('recruiter').exec();
     return job;
   }
 
   async getcompanyIdbyJobId(id: string): Promise<Company>{
-    
-    const job = await this.jobRepository.findOne({ _id : id}).exec();
-   
+    const job = await this.findOne(id);
     return job.recruiter ;
 
   }

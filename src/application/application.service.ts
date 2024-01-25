@@ -24,19 +24,17 @@ export class ApplicationService {
 
 
   async apply(jobId: string, userId:string , @UploadedFile() cvfile: Express.Multer.File) {
+
     // Find the job by its id
     const job = await this.js.findOne(jobId);
+    // Find the user by its id
     const user = await this.us.findUserbyId(userId);
-    
-
-    // Save the CV file to a designated folder or cloud storage
-    // Here, you would need to implement the file upload logic based on your storage preference.
     // Create the application
     const applicationData: Partial<Application> = {
       job: job,
       user: user,
       cv: cvfile.filename,};
-
+    
     const application = new this.applicationModel(applicationData);
     const savedApplication = await application.save();
     // Update the job with the new application details
@@ -45,17 +43,16 @@ export class ApplicationService {
     
     //Update the applied job to the user
     user.appliedJobs.push(savedApplication);
-    await this.us.update(userId, { appliedJobs : user.appliedJobs} as UserDocument );
+    await this.us.update(user.email, { appliedJobs : user.appliedJobs} as UserDocument );
+    
     return this.parseCircularJson(savedApplication);
      // Serialize the object excluding circular references
   }
-   
+
   private parseCircularJson(obj: any): any {
     return JSON.parse(stringify(obj));
   }
-
-
-
+   
    async findall(): Promise<Application[]>{
     return await this.applicationModel.find();
   }

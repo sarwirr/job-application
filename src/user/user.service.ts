@@ -44,7 +44,7 @@ export class UserService {
    
   }
 
-  async showmeroles(id: string){
+  async showmeroles(id: string) {
     const user = await this.userRepository.findOne({ _id :id});
     return ({roles: user.role});
   }
@@ -68,4 +68,49 @@ export class UserService {
     return this.userRepository.findOneAndDelete({ email });
   }
 
+<<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
 }
+=======
+    // get profile image
+    async getProfileImage(id: string): Promise<string> {
+      try {
+        return await this.userRepository.findById(id, { profileImage: 1 });
+      } catch (err) {
+        throw new Error(`Error getting profile image: ${err}`);
+      }
+    }
+    // delete profile image
+    async deleteProfileImage(id: string){
+      try {
+        return await this.userRepository.findByIdAndUpdate(id, { profileImage: null }, { new: true });
+      } catch (err) {
+        throw new Error(`Error deleting profile image: ${err}`);
+      }
+
+    }
+  
+    async updateProfile(id: string, avatar: Express.Multer.File, updateProfileDto: any): Promise<any> {
+      let photo = this.profileImage(avatar);
+      try {
+        return await this.userRepository.findByIdAndUpdate(
+          id,
+          { ...updateProfileDto, profileImage: photo },
+          { new: true },
+        );
+      }
+      catch (err) {
+        throw new Error(`Error updating ${this.userRepository}: ${err}`);
+      }
+    }
+  
+    profileImage(avatar: Express.Multer.File): string {
+      let photo;
+      if (avatar) {
+        photo = avatar.path.replace('public', '').split('\\').join('/');
+      }
+      return photo;
+    }
+  
+  }
+
+>>>>>>> tested routes and corrected bugs
