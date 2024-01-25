@@ -1,5 +1,4 @@
-import { Injectable, NotFoundException, UploadedFile } from '@nestjs/common';
-import { CreateApplicationDto } from './dto/create-application.dto';
+import { Injectable, UploadedFile } from '@nestjs/common';
 import { UpdateApplicationDto } from './dto/update-application.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Application, ApplicationDocument } from './entities/application.entity';
@@ -10,7 +9,6 @@ import { JobService } from 'src/job/job.service';
 import { Job, JobDocument } from 'src/job/entities/job.entity';
 import { UserDocument } from 'src/user/entities/user.entity';
 import { stringify } from 'flatted';
-import * as fs from 'fs';
 import { UpdateJobDto } from 'src/job/dto/update-job.dto';
 
 @Injectable()

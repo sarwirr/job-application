@@ -15,7 +15,7 @@ export class ApplicationController {
     private readonly jobService: JobService) {}
 
  
-    @Post(':jobid')
+  @Post(':jobid')
     @UseInterceptors(FileInterceptor('file', {storage: diskStorage({destination :'/home/sarwir/projects/job-application/filesuploads',filename:(req,file,cb)=>{
     cb(null, `${file.originalname}`)}})})) 
     async create(@Request() req,@Param('jobid') jobId: string, @UploadedFile() file: Express.Multer.File) {  
@@ -40,6 +40,8 @@ export class ApplicationController {
 >>>>>>> tested routes and corrected bugs
     return this.applicationService.apply(jobId,req.user.userId,file);
     }
+
+  
 
   @Get()
   findAll() : Promise <Application[]>{
