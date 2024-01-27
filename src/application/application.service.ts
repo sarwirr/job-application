@@ -79,4 +79,9 @@ export class ApplicationService {
   remove(id: string) {
     return `This action removes a #${id} application`;
   }
+
+  async findUserApplications(userId: string): Promise<Application[]> {
+    return this.applicationModel.find({ user: userId });
+  }
+  
 }
