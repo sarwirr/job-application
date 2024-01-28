@@ -1,10 +1,10 @@
-import { HttpException, Injectable, InternalServerErrorException } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { HttpException, HttpStatus, Injectable, InternalServerErrorException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { InjectModel } from '@nestjs/mongoose';
 import { User , UserDocument } from './entities/user.entity';
 import { Model } from 'mongoose';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 const hat = require('hat');
 
@@ -105,6 +105,31 @@ export class UserService {
         photo = avatar.path.replace('public', '').split('\\').join('/');
       }
       return photo;
+    }
+
+
+    async changePassword(userId: string, currentPassword: string, newPassword: string): Promise<any> {
+      const user = await this.userRepository.findById(userId).exec();
+  
+      if (!user) {
+        throw new HttpException("Utilisateur non trouvé", HttpStatus.NOT_FOUND);
+      }
+  
+      const isMatch = await bcrypt.compare(currentPassword, user.password);
+      if (!isMatch) {
+        throw new HttpException("Le mot de passe actuel est incorrect", HttpStatus.BAD_REQUEST);
+      }
+  
+      const saltOrRounds = 10;
+      const hashedPassword = await bcrypt.hash(newPassword, saltOrRounds);
+      user.password = hashedPassword;
+  
+      try {
+        await user.save();
+        return { message: "Mot de passe mis à jour avec succès" };
+      } catch (error) {
+        throw new InternalServerErrorException();
+      }
     }
   
   }
