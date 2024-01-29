@@ -80,5 +80,9 @@ export class ApplicationService {
     const appliedJobs = user.appliedJobs;
     return appliedJobs;
   }
+
+  async findUserApplications(userId: string): Promise<Application[]> {
+    return this.applicationModel.find({ user: userId });
+  }
   
 }

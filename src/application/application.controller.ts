@@ -44,8 +44,18 @@ export class ApplicationController {
     return this.applicationService.update(id, updateApplicationDto);
   }
 
+
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.applicationService.remove(id);
   }
+
+  @Get('user/:userId')
+  findUserApplications(@Param('userId') userId: string): Promise<Application[]> {
+    return this.applicationService.findUserApplications(userId);
+  }
+  
+
+
 }

@@ -1,4 +1,4 @@
-import { HttpException, Injectable, InternalServerErrorException } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
@@ -68,7 +68,6 @@ export class UserService {
     return this.userRepository.findOneAndDelete({ email });
   }
 
-    // get profile image
     async getProfileImage(id: string): Promise<string> {
       try {
         return await this.userRepository.findById(id, { profileImage: 1 });
@@ -76,7 +75,6 @@ export class UserService {
         throw new Error(`Error getting profile image: ${err}`);
       }
     }
-    // delete profile image
     async deleteProfileImage(id: string){
       try {
         return await this.userRepository.findByIdAndUpdate(id, { profileImage: null }, { new: true });
@@ -106,6 +104,31 @@ export class UserService {
         photo = avatar.path.replace('public', '').split('\\').join('/');
       }
       return photo;
+    }
+
+
+    async changePassword(userId: string, currentPassword: string, newPassword: string): Promise<any> {
+      const user = await this.userRepository.findById(userId).exec();
+  
+      if (!user) {
+        throw new HttpException("Utilisateur non trouvé", HttpStatus.NOT_FOUND);
+      }
+  
+      const isMatch = await bcrypt.compare(currentPassword, user.password);
+      if (!isMatch) {
+        throw new HttpException("Le mot de passe actuel est incorrect", HttpStatus.BAD_REQUEST);
+      }
+  
+      const saltOrRounds = 10;
+      const hashedPassword = await bcrypt.hash(newPassword, saltOrRounds);
+      user.password = hashedPassword;
+  
+      try {
+        await user.save();
+        return { message: "Mot de passe mis à jour avec succès" };
+      } catch (error) {
+        throw new InternalServerErrorException();
+      }
     }
   
   }

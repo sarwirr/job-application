@@ -3,10 +3,16 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { ChangePasswordDto } from './dto/change-password.dto';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
+
+  @Post('register')
+  create(@Body() createUserDto: CreateUserDto) {
+    return this.userService.register(createUserDto);
+  }
 
   @UseGuards(JwtAuthGuard)
   @Get('findall')
@@ -30,7 +36,7 @@ export class UserController {
   findnameofUserbyId(@Param('id') id :any) {
     return this.userService.findnameofUserbyId(id);
   }
-
+  
   @UseGuards(JwtAuthGuard)
   @Get('finduserbyemail:email')
   findOne(@Param('email') email :string) {
@@ -46,5 +52,14 @@ export class UserController {
   @Delete(':email')
   remove(@Param('email') email: string) {
     return this.userService.remove(email);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Patch('changePassword/:id')
+  async changePassword(
+    @Param('id') userId: string,
+    @Body() changePasswordDto: ChangePasswordDto
+  ) {
+    return this.userService.changePassword(userId, changePasswordDto.currentPassword, changePasswordDto.newPassword);
   }
 }
