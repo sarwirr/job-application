@@ -34,17 +34,26 @@ export class CompanyService {
 
   async findOne(id: string): Promise<Company>  {
     const company = await this.companyModel.findOne({ _id :id});
-    return (company) ;
+    if (company)
+      return company
+    else
+      throw new HttpException("Company not found", 404);
   }
 
-  async findOneByEmail (email: string): Promise <Company>{
+  async findOneByEmail(email: string): Promise <Company>{
     const company = await this.companyModel.findOne({ email : email});
-    return company ; 
+    if (company)
+      return company
+    else
+      throw new HttpException("Company not found", 404);
   }
 
-  async findOneByName (name: string): Promise <Company>{
+  async findOneByName(name: string): Promise <Company>{
     const company = await this.companyModel.findOne({ name : name});
-    return company ;
+    if (company)
+      return company
+    else
+      throw new HttpException("Company not found", 404);
   }
 
   async update(id: string, updateCompanyDto: UpdateCompanyDto) {
