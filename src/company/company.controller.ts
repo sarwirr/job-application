@@ -27,6 +27,11 @@ export class CompanyController {
   findByName(@Param('name') name: string){
     return this.companyService.findOneByName(name);
   }
+
+  @Get('findappliedjobs/:id')
+  findAppliedJobs(@Param('id') id: string){
+    return this.companyService.findAppliedJobs(id);
+  }
   
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCompanyDto: UpdateCompanyDto) {

@@ -46,24 +46,38 @@ export class ApplicationService {
     return this.parseCircularJson(savedApplication);
      // Serialize the object excluding circular references
   }
+  
 
   private parseCircularJson(obj: any): any {
     return JSON.parse(stringify(obj));
   }
    
+
+  async getUserInfo(userId: string) {
+  const user = await this.us.findUserbyId(userId);
+  return {
+    username: user.firstname,
+    email : user.email,
+    address : user.address,
+    phone : user.phoneNumber,
+    skills : user.skills,
+    experience : user.experience,
+    education : user.education,
+  }
+  
+  }
    async findall(): Promise<Application[]>{
     return await this.applicationModel.find();
   }
 
   async findCompanyByApplicationId(id : string){
     const application =  await this.findOne(id);
-    const company =  application.job;
-    return company;
+    const job =  application.job;
+    return job.recruiter;
 
   }
  
-
-  async findOne(id: string) {
+  async findOne(id: string): Promise<Application> {
     return await this.applicationModel.findById(id);
   }
 
@@ -72,10 +86,10 @@ export class ApplicationService {
   }
 
   remove(id: string) {
-    return `This action removes a #${id} application`;
+    return this.applicationModel.findByIdAndDelete(id);
   }
 
-  async findappliedJobs(userId: string) {
+  async findappliedJobs(userId: string): Promise<Application[]> {
     const user = await this.us.findUserbyId(userId);
     const appliedJobs = user.appliedJobs;
     return appliedJobs;

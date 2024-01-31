@@ -1,17 +1,23 @@
-import { HttpException, Injectable, InternalServerErrorException } from '@nestjs/common';
+import { HttpException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { CreateCompanyDto } from './dto/create-company.dto';
 import { UpdateCompanyDto } from './dto/update-company.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Company, CompanyDocument } from './entities/company.entity';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
+import { Job , JobDocument } from 'src/job/entities/job.entity';
+
 
 const hat = require('hat');
 
 @Injectable()
 export class CompanyService {
 
-  constructor(@InjectModel(Company.name) private companyModel: Model<CompanyDocument>) {}
+  constructor(@InjectModel(Company.name) private companyModel: Model<CompanyDocument>,
+  @InjectModel(Job.name) private jobModel: Model<JobDocument>,
+  ) {
+    
+  }
   
   async register (createCompanyDto: CreateCompanyDto) {
     const testCompany = await this.findOneByEmail(createCompanyDto.email);
@@ -68,5 +74,36 @@ export class CompanyService {
 
   remove(id: string) {
     return this.companyModel.findOneAndDelete({_id: id});
+  }
+
+  async findAppliedJobs(companyId: string) {
+    try {
+      const company = await this.companyModel
+        .findOne({ _id: companyId })
+        .populate({
+          path: 'postings',
+          populate: {
+            path: 'applications',
+          },
+        });
+
+      if (!company) {
+        throw new NotFoundException('Company not found');
+      }
+
+      const jobsWithApplications = company.postings.map((job) => {
+        const { _id, title, applications } = job;
+        return {
+          _id,
+          title,
+          applications,
+        };
+      });
+
+      return jobsWithApplications;
+
+    } catch (error) {
+      throw new NotFoundException('Error finding applied jobs');
+    }
   }
 }

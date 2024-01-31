@@ -55,4 +55,9 @@ export class JobService {
   async remove(id: string) {
     await this.jobRepository.findOneAndDelete({_id: id});
   }
+
+  async findAppliedUsers(id: string) {
+    const job = await this.findOne(id);
+    return job.applications;
+  }
 }

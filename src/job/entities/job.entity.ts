@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import mongoose, { Document, HydratedDocument, Types } from 'mongoose'
+import { Document, HydratedDocument, Types } from 'mongoose'
 import { Application } from 'src/application/entities/application.entity';
 import { Company } from 'src/company/entities/company.entity';
 import { JOB_TYPES, REMUNERATION } from 'src/utils/constants';
@@ -40,8 +40,6 @@ export class Job {
   })
   applications: Application[];
 
-  @Prop({ default: [], ref: 'Chat' })
-  chats?: []
 }
 
 export const JobSchema = SchemaFactory.createForClass(Job);

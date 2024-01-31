@@ -5,7 +5,6 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { JobService } from 'src/job/job.service';
-import { Job } from 'src/job/entities/job.entity';
 import { Application } from './entities/application.entity';
 
 @UseGuards(JwtAuthGuard)

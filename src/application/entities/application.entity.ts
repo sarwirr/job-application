@@ -16,7 +16,7 @@ export class Application {
     job: Job;
   
 
-    @Prop({ type: 'ObjectId', ref: 'User' }) // Add the correct type for the user field
+    @Prop({ type: 'ObjectId', ref: 'User' }) 
     user: User;
 
   @Prop({ required: true })
