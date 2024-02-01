@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { CompanyService } from './company.service';
 import { UpdateCompanyDto } from './dto/update-company.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { Request } from '@nestjs/common';
 
 @UseGuards(JwtAuthGuard)
 @Controller('company')
@@ -29,8 +30,8 @@ export class CompanyController {
   }
 
   @Get('findappliedjobs/:id')
-  findAppliedJobs(@Param('id') id: string){
-    return this.companyService.findAppliedJobs(id);
+  findAppliedJobs(@Request() req){
+    return this.companyService.findAppliedJobs(req.company._id);
   }
   
   @Patch(':id')
