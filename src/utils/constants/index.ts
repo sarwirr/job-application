@@ -18,6 +18,11 @@ export const SKILLS = [
     'gcp',
     'azure',
   ] as const
+<<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
+=======
+
+  export const ROLES = [ 'user' , 'company', 'admin'] as const
+>>>>>>> changed role for company
   
 <<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
   export const GENDERS = ['male', 'female', 'transgender'] as const

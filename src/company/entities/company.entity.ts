@@ -5,6 +5,7 @@ import { Job } from 'src/job/entities/job.entity'
 
 
 export type CompanyDocument = Company & Document
+import { ROLES } from 'src/utils/constants'
 
 @Schema()
 export class Company  {
@@ -30,7 +31,7 @@ export class Company  {
   @Prop({ default: null })
   website: string
 
-  @Prop()
+  @Prop({ default : ROLES[1], type: String})
   role: string;
 
   @Prop({ required: true })
