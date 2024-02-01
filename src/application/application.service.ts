@@ -41,7 +41,7 @@ export class ApplicationService {
     
     //Update the applied job to the user
     user.appliedJobs.push(savedApplication);
-    await this.us.update(user.email, { appliedJobs : user.appliedJobs} as UserDocument );
+    await this.us.update(user.email, { appliedJobs : user.appliedJobs} as UserDocument , user._id);
     
     return this.parseCircularJson(savedApplication);
      // Serialize the object excluding circular references
