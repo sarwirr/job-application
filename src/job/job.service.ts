@@ -52,6 +52,7 @@ export class JobService {
     return this.jobRepository.findByIdAndUpdate(id, updateJobDto);
   }
 
+  //only the company itself can delete the job
   async remove(id: string) {
     await this.jobRepository.findOneAndDelete({_id: id});
   }

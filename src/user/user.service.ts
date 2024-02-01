@@ -99,7 +99,7 @@ export class UserService {
 
     }
   
-    async updateProfile(id: string, avatar: Express.Multer.File, updateProfileDto: any): Promise<any> {
+    async updateProfile(id: string, avatar: Express.Multer.File, updateProfileDto: any): Promise<User> {
       let photo = this.profileImage(avatar);
       try {
         return await this.userRepository.findByIdAndUpdate(
