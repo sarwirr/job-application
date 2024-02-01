@@ -58,6 +58,10 @@ export class UserService {
     return this.userRepository.findOne({ email: email }).select('-password');
   }
   
+  async findOneforauth(email: string): Promise<User | null> {
+    return this.userRepository.findOne({ email: email });
+  }
+
   async update(email: string, updateUserDto: UpdateUserDto , user:User) {
     if (user.email !== email)
       throw new HttpException("You can only update your own account", 403);

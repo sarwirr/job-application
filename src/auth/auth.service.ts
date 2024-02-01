@@ -23,7 +23,7 @@ export class AuthService {
                 private companyService:CompanyService) {}
 
   async validate(email: string, password: string): Promise<Partial<User>> {
-    const user = await this.usersService.findOne(email);
+    const user = await this.usersService.findOneforauth(email);
     
     if (user) {
       const match = await bcrypt.compare(password, user.password);
