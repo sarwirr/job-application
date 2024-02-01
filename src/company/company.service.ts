@@ -50,6 +50,14 @@ export class CompanyService {
   }
 
   async findOneByEmail(email: string): Promise <Company>{
+    const company = await this.companyModel.findOne({ email : email}).select('-password');
+    if (company)
+      return company
+    else
+      throw new HttpException("Company not found", 404);
+  }
+
+  async findOneByEmailforauth(email: string): Promise <Company>{
     const company = await this.companyModel.findOne({ email : email});
     if (company)
       return company
