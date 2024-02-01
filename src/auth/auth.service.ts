@@ -67,6 +67,7 @@ export class AuthService {
   }
 
   async companyRegister(createCompanyDto: CreateCompanyDto) {
+    
     return this.companyService.register(createCompanyDto);
   }
 

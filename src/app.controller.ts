@@ -29,6 +29,7 @@ export class AppController {
 
   @Post('auth/company-register')
   async registerCompany(@Body() body: CreateCompanyDto) {
+    
     return this.authService.companyRegister(body);
   }
 

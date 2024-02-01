@@ -20,15 +20,18 @@ export class CompanyService {
   }
   
   async register (createCompanyDto: CreateCompanyDto) {
-    const testCompany = await this.findOneByEmail(createCompanyDto.email);
+    
+    const testCompany = await this.companyModel.findOne({ email : createCompanyDto.email});
     if (testCompany)
       throw new HttpException("Company already exists", 400);
 
     const saltOrRounds = 10;
     createCompanyDto.password = await bcrypt.hash(createCompanyDto.password, saltOrRounds);
-
+    
     const result = await this.companyModel.create({ ...createCompanyDto, token: hat() });
+    
     if (result)
+    
       return {message: "Company Created", statusCode: 201}
     else
       throw new InternalServerErrorException();
