@@ -58,8 +58,10 @@ export class UserService {
     return this.userRepository.findOne({ email: email });
   }
   
-  async update(email: string, updateUserDto: UpdateUserDto) {
-
+  async update(email: string, updateUserDto: UpdateUserDto , user:User) {
+    if (user.email !== email)
+      throw new HttpException("You can only update your own account", 403);
+    else
     if (updateUserDto.password) {
       const saltOrRounds = 10;
       updateUserDto.password = await bcrypt.hash(updateUserDto.password, saltOrRounds);
@@ -68,7 +70,11 @@ export class UserService {
   }
 
   
-  remove(email: string) {
+  async remove(email: string , user_id: string) {
+    const user = await this.userRepository.findOne({ _id: user_id });
+    if (user.email !== email)
+      throw new HttpException("You can only delete your own account", 403);
+    else 
     return this.userRepository.findOneAndDelete({ email });
   }
 

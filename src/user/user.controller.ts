@@ -1,6 +1,5 @@
-import { Controller,Request, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller,Request, Get, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
@@ -19,6 +18,7 @@ export class UserController {
   showmeroles(@Request() req){
     return this.userService.showmeroles(req.user.userId);  
   }
+
   @UseGuards(JwtAuthGuard)
   @Get('findUserbyId/:id')
   findUserbyId(@Param('id') id :any) {
@@ -39,12 +39,13 @@ export class UserController {
   
   @UseGuards(JwtAuthGuard)
   @Patch(':email')
-  update(@Param('email') email: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(email, updateUserDto);
+  update(@Param('email') email: string, @Body() updateUserDto: UpdateUserDto, @Request() req) {
+    return this.userService.update(email, updateUserDto, req.user);
   }
   @UseGuards(JwtAuthGuard)
   @Delete(':email')
-  remove(@Param('email') email: string) {
-    return this.userService.remove(email);
+  remove(@Param('email') email: string, @Request() req)
+   {
+    return this.userService.remove(email , req.user.userId);
   }
 }
