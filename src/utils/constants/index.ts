@@ -19,9 +19,22 @@ export const SKILLS = [
     'azure',
   ] as const
 <<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
+<<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
 =======
 
   export const ROLES = [ 'user' , 'company', 'admin'] as const
+>>>>>>> changed role for company
+=======
+<<<<<<< HEAD
+
+  export const ROLES = [ 'user' , 'company', 'admin'] as const
+=======
+<<<<<<< HEAD
+=======
+
+  export const ROLES = [ 'user' , 'company', 'admin'] as const
+>>>>>>> 1736002 (changed role for company)
+>>>>>>> d1a5189 (changed role for company)
 >>>>>>> changed role for company
   
 <<<<<<< 3739d343b0520c93bfdb8f11d6db2c56edfdb0aa
