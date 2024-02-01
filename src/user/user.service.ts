@@ -35,7 +35,7 @@ export class UserService {
   }
 
   async findUserbyId(id: string): Promise<User> {
-    const res = await this.userRepository.findOne({ _id :id}).exec();
+    const res = await this.userRepository.findOne({ _id :id}).select('-password').exec();
     if (res)
       return res
     else

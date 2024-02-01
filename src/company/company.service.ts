@@ -35,11 +35,11 @@ export class CompanyService {
   }
 
   async findAll(): Promise<Company[]> {
-    return this.companyModel.find();
+    return this.companyModel.find().select('-password');
   }
 
   async findOne(id: string): Promise<Company>  {
-    const company = await this.companyModel.findOne({ _id :id});
+    const company = await this.companyModel.findOne({ _id :id}).select('-password');
     if (company)
       return company
     else
@@ -47,7 +47,7 @@ export class CompanyService {
   }
 
   async findOneByEmail(email: string): Promise <Company>{
-    const company = await this.companyModel.findOne({ email : email});
+    const company = await this.companyModel.findOne({ email : email}).select('-password');
     if (company)
       return company
     else
@@ -55,7 +55,7 @@ export class CompanyService {
   }
 
   async findOneByName(name: string): Promise <Company>{
-    const company = await this.companyModel.findOne({ name : name});
+    const company = await this.companyModel.findOne({ name : name}).select('-password');
     if (company)
       return company
     else
