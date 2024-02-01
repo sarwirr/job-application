@@ -35,8 +35,8 @@ export class CompanyController {
   }
   
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCompanyDto: UpdateCompanyDto) {
-    return this.companyService.update(id, updateCompanyDto);
+  update(@Param('id') id: string, @Body() updateCompanyDto: UpdateCompanyDto , @Request() req) {
+    return this.companyService.update(id, updateCompanyDto , req.company);
   }
 
   @Delete(':id')

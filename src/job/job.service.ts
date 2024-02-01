@@ -27,7 +27,7 @@ export class JobService {
       const savedjob = await createdjob.save();
       company.postings.push(savedjob);
       
-      await this.companyService.update(company._id, { postings : company.postings} as UpdateJobDto );
+      await this.companyService.update(company._id, { postings : company.postings} as UpdateJobDto , company);
       return savedjob;
     } else
       throw new BadRequestException('Company does not exist');

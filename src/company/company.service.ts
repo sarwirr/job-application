@@ -62,8 +62,9 @@ export class CompanyService {
       throw new HttpException("Company not found", 404);
   }
 
-  async update(id: string, updateCompanyDto: UpdateCompanyDto) {
-    
+  async update(id: string, updateCompanyDto: UpdateCompanyDto , company: Company) {
+    if (updateCompanyDto.email !== company.email) 
+      throw new HttpException('Can Update your own account', 400);
     if (updateCompanyDto.password) {
       const saltOrRounds = 10;
       updateCompanyDto.password = await bcrypt.hash(updateCompanyDto.password, saltOrRounds);
