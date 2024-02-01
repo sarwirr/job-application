@@ -1,4 +1,4 @@
-import { Injectable, UploadedFile } from '@nestjs/common';
+import { HttpException, Injectable, UploadedFile } from '@nestjs/common';
 import { UpdateApplicationDto } from './dto/update-application.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Application, ApplicationDocument } from './entities/application.entity';
@@ -85,8 +85,12 @@ export class ApplicationService {
     return `This action updates a #${id} application`;
   }
 
-  remove(id: string) {
-    return this.applicationModel.findByIdAndDelete(id);
+  async remove(appplication_id: string , company_id: string) {
+    const company = await  this.findCompanyByApplicationId(appplication_id);
+    if (company_id !== company._id.toString())
+      throw new HttpException("You can only delete your own applications", 403);
+    else  
+    return this.applicationModel.findByIdAndDelete(appplication_id);
   }
 
   async findappliedJobs(userId: string): Promise<Application[]> {

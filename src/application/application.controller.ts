@@ -63,7 +63,7 @@ export class ApplicationController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.applicationService.remove(id);
+  remove(@Param('id') id: string , @Request() req){
+    return this.applicationService.remove(id , req.company._id);
   }
 }
