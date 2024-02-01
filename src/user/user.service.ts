@@ -31,7 +31,7 @@ export class UserService {
 
   
   async findAll(): Promise<User[]> {
-    return this.userRepository.find();
+    return this.userRepository.find().select('-password');
   }
 
   async findUserbyId(id: string): Promise<User> {
@@ -55,7 +55,7 @@ export class UserService {
 
 
   async findOne(email: string): Promise<User | null> {
-    return this.userRepository.findOne({ email: email });
+    return this.userRepository.findOne({ email: email }).select('-password');
   }
   
   async update(email: string, updateUserDto: UpdateUserDto , user:User) {
