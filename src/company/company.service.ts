@@ -50,7 +50,7 @@ export class CompanyService {
   }
 
   async findOneByEmail(email: string): Promise <Company>{
-    const company = await this.companyModel.findOne({ email : email}).select('-password');
+    const company = await this.companyModel.findOne({ email : email});
     if (company)
       return company
     else
